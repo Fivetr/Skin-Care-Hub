@@ -6,4 +6,10 @@
   .nav-items {
     @apply flex gap-2 items-center justify-start pl-5 p-2 cursor-pointer hover:bg-gray-400 bg-gradient-to-r from-green-300 to-blue-300 hover:from-sky-300 hover:to-teal-300 font-bold;
   }
+  .input {
+    @apply block w-full rounded-lg border-2 p-2.5 placeholder-gray-400 outline-none  focus:border-white focus:ring-2 focus:ring-black sm:text-sm;
+  }
+  .btn {
+    @apply inline-block cursor-pointer rounded-md border-2 border-cyan-200 bg-cyan-100 px-3 py-1 font-semibold no-underline shadow-md shadow-cyan-300 duration-500 hover:scale-110 hover:bg-cyan-300;
+  }
 }

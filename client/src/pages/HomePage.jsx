@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 
-function home() {
+function HomePage() {
   return (
     <>
       <Header />
@@ -17,4 +17,4 @@ function home() {
   );
 }
 
-export default home;
+export default HomePage;

@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
 
   return (
@@ -17,7 +17,10 @@ function Header() {
           <Link to="/">Logo</Link>
         </div>
         <div>search component</div>
-        <button className="sm:hidden" onClick={() => setOpen(!Open)}>
+        <button
+          className="sm:hidden hover:scale-110 duration-700"
+          onClick={() => setOpen(!Open)}
+        >
           {Open ? <AiFillCloseSquare /> : <FaBars />}
         </button>
         <nav className="hidden sm:block">
@@ -36,7 +39,7 @@ function Header() {
           </ul>
         </nav>
       </div>
-      <div className="bg-sky-100">
+      <div className={`${pageBG}`}>
         <Transition
           show={Open}
           enter="transition ease-out duration-700 transform"
