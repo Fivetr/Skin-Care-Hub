@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .nav-items {
+    @apply flex gap-2 items-center justify-start pl-5 p-2 cursor-pointer hover:bg-gray-400 bg-gradient-to-r from-green-300 to-blue-300 hover:from-sky-300 hover:to-teal-300 font-bold;
+  }
+}

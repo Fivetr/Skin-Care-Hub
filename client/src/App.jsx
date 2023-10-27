@@ -1,21 +1,15 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Auth from "./pages/Auth";
 function App() {
-  const [data, setdata] = useState();
-  useEffect(() => {
-    fetch("/api/test")
-      .then((res) => res.json())
-      .then((data) => setdata(data));
-  }, []);
   return (
-    <div className="mt-2">
-      {data?.map((user) => (
-        <div key={user.id}>
-          <h1>{user.id}</h1>
-        </div>
-      ))}
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/auth" element={<Auth />} />
+      </Routes>
+    </Router>
   );
 }
 
