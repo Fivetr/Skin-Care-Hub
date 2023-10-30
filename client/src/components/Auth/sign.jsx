@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ImSpinner8 } from "react-icons/im";
 
 function sign({ setAuthMenu }) {
-  const [loading, setloading] = useState(true);
-  const [UserInput, setUserInput] = useState({ user: "", password: "" });
+  const [loading, setloading] = useState(false);
+  const [UserInput, setUserInput] = useState({ email: "", password: "" });
   const handleSubmit = () => {};
   const handleChange = (e) => {
     setUserInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -17,12 +17,12 @@ function sign({ setAuthMenu }) {
       <h1 className="text-2xl font-medium">Login</h1>
 
       <label htmlFor="email" className="mb-2 block text-sm font-medium">
-        User Name or Email
+        Email
       </label>
       <input
         type="text"
-        id="user"
-        name="user"
+        id="email"
+        name="email"
         className="input"
         required
         onChange={handleChange}

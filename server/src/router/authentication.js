@@ -4,8 +4,16 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+
+  const user = await getUser(email);
+  if (!user) return res.status(401).send({ mgs: "email not found" });
+
+  const validPassword = await bcrypt.compare(password, user.password);
+  if (!validPassword) return res.status(401).send({ mgs: "wrong password" });
+
+  return res.status(200).send(user);
 });
 
 router.post("/register", async (req, res) => {
