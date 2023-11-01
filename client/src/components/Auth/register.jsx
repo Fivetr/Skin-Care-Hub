@@ -34,7 +34,7 @@ function register({ setAuthMenu }) {
             toast.error("USERNAME OR EMAIL ALREADY EXISTS");
             break;
           default:
-            toast.error("Invalid Email or Password");
+            toast.error("Invalid INPUT");
         }
         setloading(false);
         return;

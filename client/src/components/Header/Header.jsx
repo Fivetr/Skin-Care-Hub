@@ -2,14 +2,16 @@ import React from "react";
 import { FaBars } from "react-icons/fa";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { FaCartShopping, FaRegNewspaper } from "react-icons/fa6";
-import { FaUserAlt } from "react-icons/fa";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
-
+  const user = useSelector((state) => state.user.exist);
   return (
     <>
       <div className="h-10 border-b py-2 px-5 border-gray-200 flex justify-between items-center bg-gradient-to-tl from-cyan-100  to-cyan-200">
@@ -26,15 +28,41 @@ function Header({ pageBG }) {
         <nav className="hidden sm:block">
           <ul className="flex items-center gap-6">
             <li className="p-2 cursor-pointer hover:scale-125 duration-700">
-              <Link to="/auth">
-                <FaUserAlt />
-              </Link>
+              {user ? (
+                <Link to="/">
+                  <FaCartShopping />
+                </Link>
+              ) : (
+                <button
+                  onClick={() => toast.error("PLEASES LOGIN FIRST")}
+                  className="flex items-center"
+                >
+                  <FaCartShopping />
+                </button>
+              )}
             </li>
             <li className="p-2 cursor-pointer hover:scale-125 duration-700">
-              <FaCartShopping />
+              {user ? (
+                <Link to="/">
+                  <FaRegNewspaper />
+                </Link>
+              ) : (
+                <button
+                  onClick={() => toast.error("PLS LOGIN FIRST")}
+                  className="flex items-center"
+                >
+                  <FaRegNewspaper />
+                </button>
+              )}
             </li>
             <li className="p-2 cursor-pointer hover:scale-125 duration-700">
-              <FaRegNewspaper />
+              {user ? (
+                <FiLogOut />
+              ) : (
+                <Link to="/auth">
+                  <FiLogIn />
+                </Link>
+              )}
             </li>
           </ul>
         </nav>
@@ -54,8 +82,8 @@ function Header({ pageBG }) {
             <ul>
               <Link to="/auth">
                 <li className="nav-items border-b border-gray-200 rounded-t-lg">
-                  User
-                  <FaUserAlt />
+                  Login
+                  <FiLogIn />
                 </li>
               </Link>
               <li className="nav-items border-b border-gay-200">
