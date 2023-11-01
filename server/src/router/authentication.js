@@ -1,17 +1,17 @@
 import express from "express";
-import UserModel, { createUser, userExists, getUser } from "../db/users.js";
+import { createUser, userExists, getUser } from "../db/users.js";
 import bcrypt from "bcrypt";
 
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-
   const user = await getUser(email);
-  if (!user) return res.status(401).send({ mgs: "email not found" });
+  if (!user) return res.status(401).send({ msg: "email not found" });
 
   const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) return res.status(401).send({ mgs: "wrong password" });
+  console.log(validPassword);
+  if (!validPassword) return res.status(401).send({ msg: "wrong password" });
 
   return res.status(200).send(user);
 });
