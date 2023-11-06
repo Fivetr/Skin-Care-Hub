@@ -8,10 +8,35 @@ import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { offsetUser } from "../../redux/features/auth/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.exist);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "GET",
+        credentials: "same-origin",
+      });
+      console.log(response);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        dispatch(offsetUser());
+        navigate("/");
+        toast.success("LOGGED OUT");
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (e) {
+      console.error("Error logging out:", e);
+    }
+  };
   return (
     <>
       <div className="h-10 border-b py-2 px-5 border-gray-200 flex justify-between items-center bg-gradient-to-tl from-cyan-100  to-cyan-200">
@@ -57,7 +82,9 @@ function Header({ pageBG }) {
             </li>
             <li className="p-2 cursor-pointer hover:scale-125 duration-700">
               {user ? (
-                <FiLogOut />
+                <button onClick={handleLogout}>
+                  <FiLogOut />
+                </button>
               ) : (
                 <Link to="/auth">
                   <FiLogIn />
