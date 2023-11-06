@@ -1,19 +1,44 @@
 import express from "express";
-import { createUser, userExists, getUser } from "../db/users.js";
+import { createUser, userExists } from "../db/users.js";
 import bcrypt from "bcrypt";
+import passport from "passport";
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await getUser(email);
-  if (!user) return res.status(401).send({ msg: "email not found" });
+router.post("/login", async (req, res, next) => {
+  passport.authenticate("local", (e, user, info) => {
+    if (e) {
+      return res.status(500).json({ msg: e });
+    }
+    if (!user) {
+      return res.status(401).json({ msg: info.msg });
+    }
+    req.logIn(user, (e) => {
+      if (e) {
+        return res.status(500).json({ msg: e });
+      }
+      return res.status(200).json({ msg: "Login successful" });
+    });
+  })(req, res, next);
+});
 
-  const validPassword = await bcrypt.compare(password, user.password);
-  console.log(validPassword);
-  if (!validPassword) return res.status(401).send({ msg: "wrong password" });
+// router.get("/profile", (req, res) => {
+//   if (req.isAuthenticated()) {
+//     const user = req.user;
+//     res.json(user);
+//   } else {
+//     res.status(401).json({ msg: "Not authenticated" });
+//   }
+// });
 
-  return res.status(200).send(user);
+router.get("/logout", (req, res) => {
+  req.logout((e) => {
+    if (e) {
+      return res.status(500).json({ msg: "Logout error" });
+    }
+    console.log("Logged Out");
+    return res.status(200).json({ msg: "Logged Out" });
+  });
 });
 
 router.post("/register", async (req, res) => {

@@ -32,4 +32,13 @@ export const getUser = async (email) => {
   }
 };
 
+export const getUserById = async (id) => {
+  try {
+    const user = await UserModel.findById(id);
+    return user;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 export default UserModel;
