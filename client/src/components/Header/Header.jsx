@@ -39,54 +39,54 @@ function Header({ pageBG }) {
   };
   return (
     <>
-      <div className="h-10 border-b py-2 px-5 border-gray-200 flex justify-between items-center bg-gradient-to-tl from-cyan-100  to-cyan-200">
-        <div className="">
+      <div className="tw-h-10 tw-border-b tw-py-2 tw-px-5 tw-border-gray-200 tw-flex tw-justify-between tw-bg-gradient-to-tl tw-from-cyan-100  tw-to-cyan-200">
+        <div className="tw-text-green-50 ">
           <Link to="/">Logo</Link>
         </div>
         <div>search component</div>
         <button
-          className="sm:hidden hover:scale-110 duration-700"
+          className="sm:tw-hidden hover:tw-scale-110 tw-duration-700"
           onClick={() => setOpen(!Open)}
         >
           {Open ? <AiFillCloseSquare /> : <FaBars />}
         </button>
-        <nav className="hidden sm:block">
-          <ul className="flex items-center gap-6">
-            <li className="p-2 cursor-pointer hover:scale-125 duration-700">
+        <nav className="tw-hidden sm:tw-block tw-items-center">
+          <ul className="tw-flex tw-items-center tw-gap-6 tw-justify-between tw-h-full">
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
-                <Link to="/">
+                <Link to="/" className="tw-text-black">
                   <FaCartShopping />
                 </Link>
               ) : (
                 <button
                   onClick={() => toast.error("PLEASES LOGIN FIRST")}
-                  className="flex items-center"
+                  className="tw-flex tw-items-center"
                 >
                   <FaCartShopping />
                 </button>
               )}
             </li>
-            <li className="p-2 cursor-pointer hover:scale-125 duration-700">
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
-                <Link to="/">
+                <Link to="/" className="tw-text-black">
                   <FaRegNewspaper />
                 </Link>
               ) : (
                 <button
                   onClick={() => toast.error("PLS LOGIN FIRST")}
-                  className="flex items-center"
+                  className="tw-flex tw-items-center"
                 >
                   <FaRegNewspaper />
                 </button>
               )}
             </li>
-            <li className="p-2 cursor-pointer hover:scale-125 duration-700">
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
                 <button onClick={handleLogout}>
                   <FiLogOut />
                 </button>
               ) : (
-                <Link to="/auth">
+                <Link to="/auth" className="tw-text-black">
                   <FiLogIn />
                 </Link>
               )}
@@ -97,26 +97,26 @@ function Header({ pageBG }) {
       <div className={`${pageBG}`}>
         <Transition
           show={Open}
-          enter="transition ease-out duration-700 transform"
-          enterFrom="-translate-y-full opacity-0"
-          enterTo="translate-y-0 opacity-100"
-          leave="transition ease-in duration-500 transform"
-          leaveFrom="translate-y-0 opacity-100"
-          leaveTo="-translate-y-full opacity-0"
-          className="pt-4 "
+          enter="tw-transition tw-ease-out tw-duration-700 tw-transform"
+          enterFrom="tw--translate-y-full tw-opacity-0"
+          enterTo="tw-translate-y-0 tw-opacity-100"
+          leave="tw-transition tw-ease-in tw-duration-500 tw-transform"
+          leaveFrom="tw-translate-y-0 tw-opacity-100"
+          leaveTo="tw--translate-y-full tw-opacity-0"
+          className="tw-pt-4 "
         >
-          <nav className="mx-auto w-[18rem] border rounded-lg border-gray-200">
+          <nav className="tw-mx-auto tw-w-[18rem] tw-rounded-lg tw-border-gray-200">
             <ul>
-              <Link to="/auth">
-                <li className="nav-items border-b border-gray-200 rounded-t-lg">
+              <Link to="/auth" className="tw-text-black tw-no-underline">
+                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg">
                   Login
                   <FiLogIn />
                 </li>
               </Link>
-              <li className="nav-items border-b border-gay-200">
+              <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200">
                 Cart <FaCartShopping />
               </li>
-              <li className="nav-items rounded-b-lg ">
+              <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg ">
                 Orders <FaRegNewspaper />
               </li>
             </ul>

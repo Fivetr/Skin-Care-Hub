@@ -4,12 +4,12 @@
 
 @layer components {
   .nav-items {
-    @apply flex gap-2 items-center justify-start pl-5 p-2 cursor-pointer hover:bg-gray-400 bg-gradient-to-r from-green-300 to-blue-300 hover:from-sky-300 hover:to-teal-300 font-bold;
+    @apply tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer tw-hover:bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 tw-hover:from-sky-300 tw-hover:to-teal-300 tw-font-bold;
   }
   .input {
-    @apply block w-full rounded-lg border-2 p-2.5 placeholder-gray-400 outline-none  focus:border-white focus:ring-2 focus:ring-black sm:text-sm;
+    @apply tw-block tw-w-full tw-rounded-lg tw-border-2 tw-p-2.5 tw-placeholder-gray-400 tw-outline-none focus:tw-border-white focus:tw-ring-2 focus:tw-ring-black sm:tw-text-sm;
   }
   .btn {
-    @apply inline-block cursor-pointer rounded-md border-2 border-cyan-200 bg-cyan-100 px-3 py-1 font-semibold no-underline shadow-md shadow-cyan-300 duration-500 hover:scale-110 hover:bg-cyan-300;
+    @apply tw-inline-block tw-cursor-pointer tw-rounded-md tw-border-2 tw-border-cyan-200 tw-bg-cyan-100 tw-px-3 tw-py-1 tw-font-semibold tw-no-underline tw-shadow-md tw-shadow-cyan-300 tw-duration-500 hover:tw-scale-110 hover:tw-bg-cyan-300;
   }
 }

@@ -53,19 +53,22 @@ function register({ setAuthMenu }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-5 pt-[15%] w-[25rem] mx-auto"
+      className="tw-space-y-5 tw-pt-[15%] tw-w-[25rem] tw-mx-auto"
     >
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-medium">Register</h1>
+      <div className="tw-flex tw-justify-between">
+        <h1 className="tw-text-2xl tw-font-medium">Register</h1>
         <a
-          className="w-[30%] flex justify-end items-center gap-2 cursor-pointer underline text-center"
+          className="tw-w-[30%] tw-flex tw-justify-end tw-items-center tw-gap-2 tw-cursor-pointer tw-underline tw-text-center"
           onClick={() => setAuthMenu(true)}
         >
           <RiArrowGoBackLine />
         </a>
       </div>
 
-      <label htmlFor="email" className="mb-2 block text-sm font-medium">
+      <label
+        htmlFor="email"
+        className="tw-mb-2 block tw-text-sm tw-font-medium"
+      >
         User Name
       </label>
       <input
@@ -76,7 +79,10 @@ function register({ setAuthMenu }) {
         required
         onChange={handleChange}
       />
-      <label htmlFor="email" className="mb-2 block text-sm font-medium">
+      <label
+        htmlFor="email"
+        className="tw-mb-2 tw-block tw-text-sm tw-font-medium"
+      >
         Email
       </label>
       <input
@@ -88,7 +94,10 @@ function register({ setAuthMenu }) {
         onChange={handleChange}
       />
 
-      <label htmlFor="email" className="mb-2 block text-sm font-medium">
+      <label
+        htmlFor="email"
+        className="tw-mb-2 tw-block tw-text-sm tw-font-medium"
+      >
         Password
       </label>
       <input
@@ -101,21 +110,21 @@ function register({ setAuthMenu }) {
         onChange={handleChange}
       />
       {password_error ? (
-        <p className="text-sm text-red-600">
+        <p className="tw-text-sm tw-text-red-600">
           A password must contain at least 12 characters, with at least 1
           digits, 1 lower case letter, 1 upper case letter and 1 special
           character.
         </p>
       ) : null}
-      <div className="flex justify-center items-center">
+      <div className="tw-flex tw-justify-center tw-items-center">
         <button
           type="submit"
-          className="btn w-[32%] h-10 text-center font-medium hover:scale-105"
+          className="tw-inline-block tw-cursor-pointer tw-rounded-md tw-border-2 tw-border-cyan-200 tw-bg-cyan-100 tw-px-3 tw-py-1 tw-no-underline tw-shadow-md tw-shadow-cyan-300 tw-duration-500 hover:tw-bg-cyan-300 tw-w-[32%] tw-h-10 tw-text-center tw-font-medium hover:tw-scale-105"
         >
           {/* render loading anamiation if is loading */}
           {loading ? (
-            <div className="flex items-center justify-center gap-3">
-              <div className="animate-spin">
+            <div className="tw-flex tw-items-center tw-justify-center tw-gap-3">
+              <div className="tw-animate-spin">
                 <ImSpinner8 />
               </div>
               Loading...
