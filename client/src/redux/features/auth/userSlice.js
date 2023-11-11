@@ -1,9 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // id: "",
-  // name: "",
-  // email: "",
   exist: false,
 };
 
@@ -12,9 +9,6 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state) => {
-      // state.id = _id;
-      // state.name = username;
-      // state.email = email;
       state.exist = true;
     },
     offsetUser: (state) => {
