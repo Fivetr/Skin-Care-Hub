@@ -1,44 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { FaCaretSquareLeft, FaCaretSquareRight } from "react-icons/fa";
+import ProductCard from "./productCard";
 
-function products() {
-  const [Products, setProducts] = useState();
-  const [Page, setPage] = useState(1);
-  useEffect(() => {
-    const fetchPRoducts = async () => {
-      const response = await fetch("/api/search/products");
-      const data = await response.json();
-      setProducts(data);
-    };
-    fetchPRoducts();
-  }, []);
+function products({ Products, handleLeft, handleRight, Page }) {
   return (
-    <div className="tw-container tw-mx-auto">
-      <div className="tw-grid tw-grid-cols-1 tw-gap-8 tw-place-items-center tw-border tw-border-black">
+    <div className="tw-container tw-mx-auto tw-mt-6">
+      <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-3 tw-gap-8 tw-place-items-center ">
         {Products?.slice(Page * 10 - 10, Page * 10).map(
-          ({
-            price,
-            image_url,
-            product_name,
-            product_type,
-            _id,
-            clean_ingreds,
-          }) => (
-            <div
+          ({ image_url, product_name, _id }) => (
+            <ProductCard
               key={_id}
-              className="tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow tw-w-[25rem] tw-h-[18rem] tw-flex-col tw-flex tw-justify-center tw-items-center"
-            >
-              <h5 className="tw-mb-2 tw-text-2xl tw-font-bold tw-tracking-tight tw-text-gray-900">
-                {product_name}
-              </h5>
-
-              <p className="tw-mb-3 tw-font-normal tw-text-gray-700 ">
-                Here are the biggest enterprise technology acquisitions of 2021
-                so far, in reverse chronological order.
-              </p>
-              {product_name}
-            </div>
+              product_name={product_name}
+              image_url={image_url}
+              id={_id}
+            />
           )
         )}
+      </div>
+      <div className="tw-flex tw-justify-center tw-mt-9 tw-text-2xl tw-gap-4 tw-items-center">
+        <button
+          className="hover:tw-scale-90 tw-cursor-pointer tw-duration-500"
+          onClick={handleLeft}
+        >
+          <FaCaretSquareLeft />
+        </button>
+        <span className="tw-text-[1.15rem]">{Page}</span>{" "}
+        <button
+          className="hover:tw-scale-90 tw-cursor-pointer tw-duration-500"
+          onClick={handleRight}
+        >
+          <FaCaretSquareRight />
+        </button>
       </div>
     </div>
   );

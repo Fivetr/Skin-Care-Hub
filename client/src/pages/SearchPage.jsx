@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header/Header";
-import Products from "../components/Search/products";
+import Footer from "../components/Footer/Footer";
+import ProductsGrid from "../components/Search/products";
 
 function SearchPage() {
   const [Products, setProducts] = useState();
   const [Page, setPage] = useState(1);
+  const [MaxPage, setMaxPage] = useState();
   useEffect(() => {
     const fetchPRoducts = async () => {
       const response = await fetch("/api/search/products");
       const data = await response.json();
       setProducts(data);
+      setMaxPage(Math.ceil(data.length / 10));
     };
     fetchPRoducts();
   }, []);
+  const handleLeft = () => {
+    if (Page === 1) {
+      setPage(MaxPage);
+    } else setPage((prev) => (prev -= 1));
+  };
+  const handleRight = () => {
+    if (Page == MaxPage) {
+      setPage(1);
+    } else setPage((prev) => (prev += 1));
+  };
   return (
     <>
       <Header />
-      <div className="tw-p-6 tw-mt-3 tw-max-w-5xl tw-mx-auto">
+      <div className="tw-p-6 tw-mt-5 tw-max-w-5xl tw-mx-auto">
         <form>
           <div></div>
           <label className="tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 tw-sr-only tw-dark:text-white">
@@ -42,32 +55,13 @@ function SearchPage() {
           Filter
         </button>
       </div>
-
-      <div className="tw-container tw-mx-auto">
-        <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-3 tw-gap-8 tw-place-items-center ">
-          {Products?.slice(Page * 10 - 10, Page * 10).map(
-            ({
-              price,
-              image_url,
-              product_name,
-              product_type,
-              _id,
-              clean_ingreds,
-            }) => (
-              <div
-                key={_id}
-                className="tw-p-10 tw-cursor-pointer hover:tw-ring-2 hover:tw-ring-gray-400 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow tw-w-[24rem] tw-h-[20rem] tw-flex-col tw-flex tw-gap-2 tw-justify-center tw-items-center"
-              >
-                <h2 className="tw-mb-2 tw-text-[1.34rem] tw-font-bold tw-tracking-tight tw-text-gray-900">
-                  {product_name}
-                </h2>
-                <img src={image_url} className="tw-w-[10rem] tw-h-[10rem]" />
-              </div>
-            )
-          )}
-        </div>
-      </div>
-      <div></div>
+      <ProductsGrid
+        Products={Products}
+        handleLeft={handleLeft}
+        handleRight={handleRight}
+        Page={Page}
+      />
+      <Footer />
     </>
   );
 }
