@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import mongoose from "mongoose";
 import AuthRoute from "./router/authentication.js";
+import SearchRoute from "./router/products.js";
 import dotenv from "dotenv";
 import passport from "passport";
 import session from "express-session";
@@ -30,6 +31,7 @@ app.use(passport.session());
 const port = process.env.PORT || 8080;
 
 app.use("/api/auth", AuthRoute);
+app.use("/api/search", SearchRoute);
 
 app.listen(port, () => {
   console.log("server started on port", port);

@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
-const UserModel = mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("users", UserSchema);
 
 export const createUser = (value) =>
   // new UserModel(value).save().then((user) => user.toObject());
