@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { offsetUser } from "../../redux/features/auth/userSlice";
 import { useNavigate } from "react-router-dom";
+import { HiMiniSquares2X2 } from "react-icons/hi2";
+import logo from "../../assets/logo.jpg";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
@@ -39,55 +41,68 @@ function Header({ pageBG }) {
   };
   return (
     <>
-      <div className="tw-h-10 tw-border-b tw-py-2 tw-px-5 tw-border-gray-200 tw-flex tw-justify-between tw-bg-gradient-to-tl tw-from-cyan-100  tw-to-cyan-200">
-        <div className="tw-text-green-50 ">
-          <Link to="/">Logo</Link>
+      <div className="tw-h-14  tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
+        <div className="tw-text-green-50 tw-flex tw-items-center">
+          <Link to="/">
+            <img
+              src={logo}
+              className="tw-w-[3.5rem] tw-h-[3.5rem] tw-bg-white tw-relative tw--left-5"
+            />
+          </Link>
         </div>
-        <div>search component</div>
         <button
           className="sm:tw-hidden hover:tw-scale-110 tw-duration-700"
           onClick={() => setOpen(!Open)}
         >
-          {Open ? <AiFillCloseSquare /> : <FaBars />}
+          {Open ? (
+            <AiFillCloseSquare className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+          ) : (
+            <FaBars className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+          )}
         </button>
         <nav className="tw-hidden sm:tw-block tw-items-center">
           <ul className="tw-flex tw-items-center tw-gap-6 tw-justify-between tw-h-full">
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+              <Link to="/search" className="tw-text-black ">
+                <HiMiniSquares2X2 className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+              </Link>
+            </li>
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
                 <Link to="/" className="tw-text-black">
-                  <FaCartShopping />
+                  <FaCartShopping className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </Link>
               ) : (
                 <button
                   onClick={() => toast.error("PLEASES LOGIN FIRST")}
                   className="tw-flex tw-items-center"
                 >
-                  <FaCartShopping />
+                  <FaCartShopping className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </button>
               )}
             </li>
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
                 <Link to="/" className="tw-text-black">
-                  <FaRegNewspaper />
+                  <FaRegNewspaper className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </Link>
               ) : (
                 <button
                   onClick={() => toast.error("PLS LOGIN FIRST")}
                   className="tw-flex tw-items-center"
                 >
-                  <FaRegNewspaper />
+                  <FaRegNewspaper className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </button>
               )}
             </li>
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
                 <button onClick={handleLogout}>
-                  <FiLogOut />
+                  <FiLogOut className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </button>
               ) : (
                 <Link to="/auth" className="tw-text-black">
-                  <FiLogIn />
+                  <FiLogIn className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </Link>
               )}
             </li>
@@ -111,6 +126,12 @@ function Header({ pageBG }) {
                 <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg">
                   Login
                   <FiLogIn />
+                </li>
+              </Link>
+              <Link to="/search" className="tw-text-black tw-no-underline">
+                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200">
+                  Products
+                  <HiMiniSquares2X2 />
                 </li>
               </Link>
               <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200">
