@@ -18,4 +18,5 @@ router.get("/products", async (req, res) => {
   return res.status(200).json(products);
 });
 
+router.post("/products", () => {});
 export default router;
