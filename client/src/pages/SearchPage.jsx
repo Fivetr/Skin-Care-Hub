@@ -20,12 +20,12 @@ function SearchPage() {
   const handleLeft = () => {
     if (Page === 1) {
       setPage(MaxPage);
-    } else setPage((prev) => (prev -= 1));
+    } else setPage((prev) => prev - 1);
   };
   const handleRight = () => {
     if (Page == MaxPage) {
       setPage(1);
-    } else setPage((prev) => (prev += 1));
+    } else setPage((prev) => prev + 1);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
