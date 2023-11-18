@@ -4,7 +4,7 @@ import ProductCard from "./productCard";
 
 function products({ Products, handleLeft, handleRight, Page }) {
   return (
-    <div className="tw-container tw-mx-auto tw-mt-6">
+    <div className="tw-flex tw-flex-col tw-items-stretch tw-justify-between tw-container tw-mx-auto tw-mt-6 tw-min-h-[calc(100vh-14rem)] ">
       <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-3 tw-gap-8 tw-place-items-center ">
         {Products?.slice(Page * 10 - 10, Page * 10).map(
           ({ image_url, product_name, _id }) => (
