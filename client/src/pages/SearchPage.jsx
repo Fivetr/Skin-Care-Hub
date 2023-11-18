@@ -27,24 +27,15 @@ function SearchPage() {
       setPage(1);
     } else setPage((prev) => prev + 1);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const filteredProducts = Products.filter((product) => {
-      return (
-        product.product_name
-          .toLowerCase()
-          .includes(SearchInput.toLowerCase()) ||
-        product.product_type
-          .toLowerCase()
-          .includes(SearchInput.toLowerCase()) ||
-        product.clean_ingreds
-          .map((item) => item.toLowerCase())
-          .includes(SearchInput.toLowerCase())
-      );
-    });
-    setProducts(filteredProducts);
+    const response = await fetch(
+      `/api/search/products?userInput=${SearchInput}`
+    );
+    const data = await response.json();
+    setProducts(data);
     setPage(1);
-    setMaxPage(Math.ceil(filteredProducts.length / 10));
+    setMaxPage(Math.ceil(data.length / 10));
   };
   return (
     <>
