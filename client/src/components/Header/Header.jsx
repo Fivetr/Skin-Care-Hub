@@ -41,7 +41,7 @@ function Header({ pageBG }) {
   };
   return (
     <>
-      <div className="tw-h-14  tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
+      <div className="tw-h-14 tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
         <div className="tw-text-green-50 tw-flex tw-items-center">
           <Link to="/">
             <img
