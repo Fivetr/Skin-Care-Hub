@@ -1,13 +1,5 @@
-.carousel-caption {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    text-align: center;
-}
 .full-height-image {
     width: 100%;
-    height: calc(100vh - 40px);
-    object-fit:cover; 
+    height: 100vh;
+    object-fit: cover; 
 }

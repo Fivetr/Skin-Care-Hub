@@ -31,5 +31,16 @@ router.get("/products", async (req, res) => {
   return res.status(200).json(products);
 });
 
+// router.get("/categories", async (req, res) => {
+//   try {
+//     let products = await GetAllProducts();
+//     const categories = [...new Set(products.map((product) => product.product_type))];
+//     res.status(200).json(categories);
+//   } catch (error) {
+//     console.error("Error fetching categories:", error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
+
 router.post("/products", () => {});
 export default router;
