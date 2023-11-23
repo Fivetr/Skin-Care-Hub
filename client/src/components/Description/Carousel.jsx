@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./MyCarousel.css";
 
 function MyCarousel() {
   useEffect(() => {
