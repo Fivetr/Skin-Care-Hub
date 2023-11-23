@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import Category from "../components/Description/Category";
 import Carousel from "../components/Description/Carousel";
 
 function HomePage() {
@@ -12,7 +11,7 @@ function HomePage() {
         <Carousel />
       </section>
       <section className="tw-flex tw-items-center tw-justify-center tw-text-xl tw-border-b tw-border-black tw-h-screen">
-        <Category />
+        Category
       </section>
       <Footer />
     </>
