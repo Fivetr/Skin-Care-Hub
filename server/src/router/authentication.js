@@ -17,7 +17,9 @@ router.post("/login", async (req, res, next) => {
       if (e) {
         return res.status(500).json({ msg: e });
       }
-      return res.status(200).json({ msg: "Login successful" });
+      return res
+        .status(200)
+        .json({ msg: "Login successful", isAdmin: user.isAdmin });
     });
   })(req, res, next);
 });
@@ -66,6 +68,8 @@ router.post("/register", async (req, res) => {
       username,
       email,
       password: password_hashed,
+      cart: [],
+      isAdmin: false,
     });
 
     res.status(200).send({ msg: "REGISTERED SUCCESSFULLY" });

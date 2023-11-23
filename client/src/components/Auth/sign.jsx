@@ -36,7 +36,8 @@ function sign({ setAuthMenu }) {
         return;
       }
       const data = await response.json();
-      dispatch(setUser());
+      console.log(data);
+      dispatch(setUser(data.isAdmin));
       setloading(false);
       navigate("/");
       toast.success("LOGIN SUCCESSFUL !!!");

@@ -2,17 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   exist: false,
+  isAdmain: false,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state) => {
+    setUser: (state, action) => {
       state.exist = true;
+      state.isAdmain = action.payload;
     },
     offsetUser: (state) => {
       state.exist = false;
+      state.isAdmain = false;
     },
   },
 });
