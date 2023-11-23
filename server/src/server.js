@@ -42,4 +42,3 @@ app.listen(port, () => {
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGO_URL);
 mongoose.connection.on("error", (e) => console.error(e));
-
