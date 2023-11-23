@@ -7,8 +7,8 @@ function HomePage() {
   return (
     <>
       <Header />
-      <section className="tw-flex tw-tems-center tw-justify-center tw-text-xl tw-border-b tw-border-black tw-h-[calc(110vh-3.5rem)]">
-        <Carousel />
+      <section className="tw-flex tw-tems-center tw-justify-center tw-text-xl tw-border-b tw-border-black">
+        <Carousel className="w-100" />
       </section>
       <section className="tw-flex tw-items-center tw-justify-center tw-text-xl tw-h-screen">
         Category

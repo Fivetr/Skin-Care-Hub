@@ -14,21 +14,21 @@ function MyCarousel() {
     <Carousel>
       <Carousel.Item>
         <img
-          className="d-block w-100 full-height-image carousel-item"
+          className="d-block img-fluid"
           src="/Images/Carousel1.png"
           alt="Creams"
         />
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100 full-height-image carousel-item"
+          className="d-block img-fluid"
           src="/Images/Carousel2.png"
           alt="Serums"
         />
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100 full-height-image carousel-item"
+          className="d-block img-fluid"
           src="/Images/Carousel3.png"
           alt="Model"
         />
