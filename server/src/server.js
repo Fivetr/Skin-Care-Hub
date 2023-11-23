@@ -4,6 +4,7 @@ import compression from "compression";
 import mongoose from "mongoose";
 import AuthRoute from "./router/authentication.js";
 import SearchRoute from "./router/products.js";
+// import CategoryRouter from "./router/categories.js";
 import dotenv from "dotenv";
 import passport from "passport";
 import session from "express-session";
@@ -32,6 +33,7 @@ const port = process.env.PORT || 8080;
 
 app.use("/api/auth", AuthRoute);
 app.use("/api/search", SearchRoute);
+// app.use("/api/categories", CategoryRouter);
 
 app.listen(port, () => {
   console.log("server started on port", port);
@@ -40,3 +42,4 @@ app.listen(port, () => {
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGO_URL);
 mongoose.connection.on("error", (e) => console.error(e));
+
