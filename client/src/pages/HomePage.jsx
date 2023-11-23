@@ -3,6 +3,8 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Category from "../components/Description/Category";
 import Carousel from "../components/Description/Carousel";
+import MyBlogCarousel from "../components/Description/Blogs";
+
 
 function HomePage() {
   return (
@@ -11,8 +13,8 @@ function HomePage() {
       <section className="tw-flex tw-tems-center tw-justify-center tw-text-xl tw-border-b tw-border-black tw-h-[calc(100vh-3.5rem)]">
         <Carousel />
       </section>
-      <section className="tw-flex tw-items-center tw-justify-center tw-text-xl tw-border-b tw-border-black tw-h-screen">
-        <Category />
+      <section className="tw-flex tw-items-center tw-justify-center tw-text-xl tw-h-screen">
+        <MyBlogCarousel />
       </section>
       <Footer />
     </>
