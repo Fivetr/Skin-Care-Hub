@@ -3,7 +3,7 @@ import { GetAllProducts } from "../db/products.js";
 
 const router = express.Router();
 
-router.get("/products", async (req, res) => {
+router.get("/", async (req, res) => {
   const userInput = req.query.userInput;
   let products = await GetAllProducts();
   function shuffleArray(array) {
@@ -42,5 +42,5 @@ router.get("/products", async (req, res) => {
 //   }
 // });
 
-router.post("/products", () => {});
+router.post("/", () => {});
 export default router;
