@@ -1,0 +1,53 @@
+.container-fluid {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0 2rem;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .carousel-title {
+    margin: 4rem 0rem 2rem 4rem;
+  }
+
+  .carousel-content {
+    margin: 0rem 0rem 2rem 4rem;
+  }
+  
+  .d-flex {
+    align-items: center;
+  }
+  
+  .custom-card {
+    width: 100%;
+    max-width: 25rem;
+    flex: 1;
+    margin: 2rem 1rem;
+    align-items: center;
+  }
+  
+  .image-link {
+    text-decoration: none;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .container-fluid {
+      margin: 0;
+    }
+  
+    .custom-card {
+      width: 100%;
+      margin: 1rem 0;
+    }
+  
+    .carousel-title {
+      margin: 1rem 0;
+    }
+  }
+  

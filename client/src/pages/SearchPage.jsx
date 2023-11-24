@@ -15,7 +15,7 @@ function SearchPage() {
     const fetchPRoducts = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/search/products");
+        const response = await fetch("/api/products");
         const data = await response.json();
         setProducts(data);
         setMaxPage(Math.ceil(data.length / 10));
@@ -42,9 +42,7 @@ function SearchPage() {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await fetch(
-        `/api/search/products?userInput=${searchInput}`
-      );
+      const response = await fetch(`/api/products?userInput=${searchInput}`);
       const data = await response.json();
       setProducts(data);
       setPage(1);

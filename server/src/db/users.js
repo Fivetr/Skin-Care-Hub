@@ -4,6 +4,8 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  cart: { type: Array, required: true },
+  isAdmin: { type: Boolean, required: true },
 });
 
 const UserModel = mongoose.model("users", UserSchema);
