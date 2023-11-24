@@ -15,6 +15,7 @@ function App() {
         <Route exact path="/auth" element={<Auth />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/search/:id" element={<ProductPage />} />
+        <Route exact path="/search/:id" element={<ProductPage />} />
       </Routes>
     </Router>
   );
