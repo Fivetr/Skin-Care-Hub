@@ -1,5 +1,10 @@
 import express from "express";
-import { GetAllProducts } from "../db/products.js";
+import {
+  addNewProduct,
+  updateProduct,
+  deleteProduct,
+  GetAllProducts,
+} from "../db/products.js";
 
 const router = express.Router();
 
@@ -42,5 +47,65 @@ router.get("/", async (req, res) => {
 //   }
 // });
 
-router.post("/", () => {});
+// Add new product
+router.post("/", async (req, res) => {
+  try {
+    const { product_name, product_type, clean_ingreds, price, image_url } =
+      req.body;
+    const newProduct = {
+      product_name,
+      product_type,
+      clean_ingreds,
+      price: parseFloat(price),
+      image_url,
+    };
+    const insertedProduct = await addNewProduct(newProduct);
+    res.status(201).json({ message: "Added product successfully" });
+  } catch (err) {
+    console.error("Error adding new product :", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Update existing product
+router.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { product_name, product_type, clean_ingreds, price, image_url } =
+      req.body;
+    const newProduct = {
+      product_name,
+      product_type,
+      clean_ingreds,
+      price: parseFloat(price),
+      image_url,
+    };
+
+    const updatedProduct = await updateProduct(id, newProduct);
+
+    if (!updatedProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.status(200).json({ message: "Updated product successfully" });
+  } catch (err) {
+    console.error("Error updating product :", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Delete a product
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deletedProduct = await deleteProduct(id);
+    if (!deletedProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.status(200).json({ message: "Deleted product successfully" });
+  } catch (err) {
+    console.error("Error deleting product :", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 export default router;
