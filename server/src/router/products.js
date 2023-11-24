@@ -48,7 +48,7 @@ router.get("/", async (req, res) => {
 // });
 
 // Add new product
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, async (req, res) => {
   try {
     const { product_name, product_type, clean_ingreds, price, image_url } =
       req.body;
@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update existing product
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAdmin, async (req, res) => {
   try {
     const id = req.params.id;
     const { product_name, product_type, clean_ingreds, price, image_url } =
@@ -94,7 +94,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete a product
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
   try {
     const id = req.params.id;
     const deletedProduct = await deleteProduct(id);
@@ -107,5 +107,13 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+// Middleware to check if user is an admin
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user && req.user.isAdmin) {
+    return next();
+  }
+  res.status(403).json({ error: "Unauthorized access" });
+}
 
 export default router;
