@@ -1,9 +1,8 @@
 import React from "react";
 
-function search({ setSearchInput, handleSubmit }) {
+function search({ setSearchInput, handleFilterChange }) {
   return (
     <div className="tw-p-6 tw-mt-5 tw-max-w-5xl tw-mx-auto  tw-h-[10rem]">
-      <form onSubmit={handleSubmit}>
         <div className="tw-relative">
           <input
             type="search"
@@ -20,10 +19,7 @@ function search({ setSearchInput, handleSubmit }) {
             Search
           </button>
         </div>
-      </form>
-      <button className="tw-text-white tw-w-[5rem] tw-mt-4 tw-bg-blue-700 hover:tw-bg-blue-800  focus:tw-outline-none focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-4 tw-py-2">
-        Filter
-      </button>
+    
     </div>
   );
 }
