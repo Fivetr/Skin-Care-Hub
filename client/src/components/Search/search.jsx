@@ -61,7 +61,7 @@ function search({
             class="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
             onChange={(e) => setTypeValue(e.target.value)}
           >
-            <option value="Catergory">Catergory</option>
+            <option value="Category">Catergory</option>
             <option value="Moisturiser">Moisturiser</option>
             <option value="Serum">Serum</option>
             <option value="Oil">Oil</option>
