@@ -3,8 +3,17 @@ import { GetAllProducts, getProductById } from "../db/products.js";
 
 const router = express.Router();
 
-router.get("/products", async (req, res) => {
-  const userInput = req.query.userInput;
+router.get("/", async (req, res) => {
+  console.log(req.query);
+  const userInput = req.query.userInput || '';
+  const minPrice = parseFloat(req.query.minPrice) || 0;
+  const maxPrice = parseFloat(req.query.maxPrice) || Infinity;
+  const type = req.query.type || '';
+  console.log(userInput);
+  console.log(minPrice);
+  console.log(maxPrice);
+  console.log(type);
+
   let products = await GetAllProducts();
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -16,8 +25,9 @@ router.get("/products", async (req, res) => {
   }
   shuffleArray(products);
 
-  if (userInput) {
-    const filteredProducts = products.filter((product) => {
+  let filteredProducts = products
+  if(userInput) {
+    filteredProducts = filteredProducts.filter((product) => {
       return (
         product.product_name.toLowerCase().includes(userInput.toLowerCase()) ||
         product.product_type.toLowerCase().includes(userInput.toLowerCase()) ||
@@ -26,9 +36,32 @@ router.get("/products", async (req, res) => {
           .includes(userInput.toLowerCase())
       );
     });
-    return res.status(200).json(filteredProducts);
   }
-  return res.status(200).json(products);
+
+  if(minPrice > 0) {
+    filteredProducts = filteredProducts.filter((product) => {
+      return (
+        product.price >= minPrice
+      );
+    });
+  }
+
+  if(maxPrice < Infinity) {
+    filteredProducts = filteredProducts.filter((product) => {
+      return (
+        product.price <= maxPrice
+      );
+    });
+  }
+
+  if(type && type != 'Category' && type != 'undefined') {
+    filteredProducts = filteredProducts.filter((product) => {
+      return (
+        product.product_type.toLowerCase() === type.toLowerCase()
+      );
+    });
+  }
+  return res.status(200).json(filteredProducts);
 });
 
 // router.get("/categories", async (req, res) => {
@@ -48,4 +81,6 @@ router.get("/:id", async (req, res) => {
   let product = await getProductById(req.params.id);
   return res.status(200).json(product);
 })
+
+router.post("/", () => { });
 export default router;
