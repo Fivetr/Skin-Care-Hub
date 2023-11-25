@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   exist: false,
-  isAdmain: false,
+  isAdmin: false,
 };
 
 export const userSlice = createSlice({
@@ -11,11 +11,11 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.exist = true;
-      state.isAdmain = action.payload;
+      state.isAdmin = action.payload;
     },
     offsetUser: (state) => {
       state.exist = false;
-      state.isAdmain = false;
+      state.isAdmin = false;
     },
   },
 });
