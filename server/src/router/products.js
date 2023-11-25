@@ -75,7 +75,11 @@ router.get("/", async (req, res) => {
 // });
 
 // Add new product
+<<<<<<< HEAD
 router.post("/", isAdmin, async (req, res) => {
+=======
+router.post("/", async (req, res) => {
+>>>>>>> a7f5e95 (Merged conflicts)
   try {
     const { product_name, product_type, clean_ingreds, price, image_url } =
       req.body;
