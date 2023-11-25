@@ -15,6 +15,7 @@ function search({
   const handleAddProduct = () => {
     navigate("/products/add");
   };
+
   return (
     <div className="tw-p-6 tw-mt-5 tw-max-w-5xl tw-mx-auto  tw-h-[10rem]">
       <form onSubmit={handleSubmit}>
