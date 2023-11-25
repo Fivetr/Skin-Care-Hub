@@ -10,10 +10,12 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   console.log(req.query);
+
   const userInput = req.query.userInput || "";
   const minPrice = parseFloat(req.query.minPrice) || 0;
   const maxPrice = parseFloat(req.query.maxPrice) || Infinity;
   const type = req.query.type || "";
+
   console.log(userInput);
   console.log(minPrice);
   console.log(maxPrice);
@@ -29,6 +31,7 @@ router.get("/", async (req, res) => {
     }
   }
   shuffleArray(products);
+
 
   let filteredProducts = products;
   if (userInput) {
@@ -75,11 +78,7 @@ router.get("/", async (req, res) => {
 // });
 
 // Add new product
-<<<<<<< HEAD
 router.post("/", isAdmin, async (req, res) => {
-=======
-router.post("/", async (req, res) => {
->>>>>>> a7f5e95 (Merged conflicts)
   try {
     const { product_name, product_type, clean_ingreds, price, image_url } =
       req.body;

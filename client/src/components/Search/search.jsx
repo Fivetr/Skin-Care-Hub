@@ -44,7 +44,9 @@ function search({
             className="tw-w-[8rem] tw-px-2 tw-py-2 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-bg-gray-50 tw-mt-4"
             onChange={(e) => {
               setMinPriceInput(e.target.value);
-            }}
+
+            }
+          }
           />
         </div>
         <div className="tw-ml-4">
@@ -57,11 +59,10 @@ function search({
           />
         </div>
         <div className="tw-ml-4">
-          <select
-            class="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
-            onChange={(e) => setTypeValue(e.target.value)}
+          <select class="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
+          onChange={(e) => setTypeValue(e.target.value)}
           >
-            <option value="Category">Catergory</option>
+            <option value="Category">Category</option>
             <option value="Moisturiser">Moisturiser</option>
             <option value="Serum">Serum</option>
             <option value="Oil">Oil</option>
