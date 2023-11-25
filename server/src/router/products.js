@@ -55,11 +55,7 @@ router.get("/", async (req, res) => {
     });
   }
 
-<<<<<<< HEAD
   if (type && type != "Category" && type != "undefined") {
-=======
-  if (type && type != "Category") {
->>>>>>> 60574e8 (Merged with main)
     filteredProducts = filteredProducts.filter((product) => {
       return product.product_type.toLowerCase() === type.toLowerCase();
     });
