@@ -1,5 +1,5 @@
 import express from "express";
-import { GetAllProducts } from "../db/products.js";
+import { GetAllProducts, getProductById } from "../db/products.js";
 
 const router = express.Router();
 
@@ -43,4 +43,9 @@ router.get("/products", async (req, res) => {
 // });
 
 router.post("/products", () => {});
+
+router.get("/:id", async (req, res) => {
+  let product = await getProductById(req.params.id);
+  return res.status(200).json(product);
+})
 export default router;
