@@ -49,7 +49,7 @@ function search({
         </div>
         <div className="tw-ml-4">
           <input
-            type="text"
+            type="number"
             id="max-price"
             placeholder="Max Price USD"
             className="tw-w-[8rem] tw-px-2 tw-py-2 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-bg-gray-50 tw-mt-4"
