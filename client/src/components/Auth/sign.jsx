@@ -37,7 +37,7 @@ function sign({ setAuthMenu }) {
       }
       const data = await response.json();
       console.log(data);
-      dispatch(setUser(data.isAdmin));
+      dispatch(setUser(data));
       setloading(false);
       if (data.isAdmin) {
         navigate("/search");

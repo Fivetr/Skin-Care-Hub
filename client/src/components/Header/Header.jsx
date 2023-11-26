@@ -17,6 +17,7 @@ import logo from "../../assets/logo.jpg";
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.exist);
+  const currentUser = useSelector(state => state.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -69,7 +70,7 @@ function Header({ pageBG }) {
             </li>
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
-                <Link to="/" className="tw-text-black">
+                <Link to='/mycart' className="tw-text-black">
                   <FaCartShopping className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </Link>
               ) : (

@@ -19,7 +19,7 @@ router.post("/login", async (req, res, next) => {
       }
       return res
         .status(200)
-        .json({ msg: "Login successful", isAdmin: user.isAdmin });
+        .json({ msg: "Login successful", isAdmin: user.isAdmin, user });
     });
   })(req, res, next);
 });

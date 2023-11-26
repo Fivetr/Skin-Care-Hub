@@ -4,6 +4,7 @@ import Auth from "./pages/Auth";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import ProductPage from "./pages/ProductDetail";
+import CheckoutPage from "./pages/CheckoutPage";
 import NewProductPage from "./pages/NewProductPage";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/auth" element={<Auth />} />
         <Route exact path="/search" element={<SearchPage />} />
         <Route exact path="/search/:id" element={<ProductPage />} />
+        <Route exact path="/mycart" element={<CheckoutPage />} />
         <Route
           path="/products/add"
           element={isAdmin ? <NewProductPage /> : <HomePage />}

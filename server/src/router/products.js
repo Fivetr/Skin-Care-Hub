@@ -3,7 +3,7 @@ import {
   addNewProduct,
   updateProduct,
   deleteProduct,
-  GetAllProducts,
+  GetAllProducts, getProductById,
 } from "../db/products.js";
 
 const router = express.Router();
@@ -146,4 +146,11 @@ function isAdmin(req, res, next) {
   res.status(403).json({ error: "Unauthorized access" });
 }
 
+
+router.get("/:id", async (req, res) => {
+  let product = await getProductById(req.params.id);
+  return res.status(200).json(product);
+})
+
+router.post("/", () => { });
 export default router;
