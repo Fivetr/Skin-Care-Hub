@@ -151,4 +151,6 @@ router.get("/:id", async (req, res) => {
   let product = await getProductById(req.params.id);
   return res.status(200).json(product);
 })
+
+router.post("/", () => { });
 export default router;

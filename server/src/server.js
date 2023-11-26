@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import mongoose from "mongoose";
 import AuthRoute from "./router/authentication.js";
-import ProductRoute from "./router/products.js";
+import SearchRoute from "./router/products.js";
 import CartRoute from "./router/cartdetails.js";
 // import CategoryRouter from "./router/categories.js";
 import dotenv from "dotenv";
