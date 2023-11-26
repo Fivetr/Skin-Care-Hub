@@ -1,34 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React ,{ useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
-import { useSelector, useDispatch } from 'react-redux';
+import Product from "../components/Product/Product";
+import { useSelector, useDispatch} from 'react-redux';
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import { CiShoppingBasket } from "react-icons/ci";
 
 function ProductDetail() {
+  const [product, setProduct] = useState();
+  const [quantity, setQuantity] = useState();
   const { id } = useParams();
   const user = useSelector(state => state.user);
-  const dispatch = useDispatch();
-  const [products, setProducts] = useState();
-  // return <div>{id}</div>;
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchPRoducts = async () => {
+    const fetchProductData = async () => {
       try {
-        const response = await fetch(`/api/products/${id}`);
+        // setLoading(true);
+        const response = await fetch(`/api/products/${id}`);        
         const data = await response.json();
+        setProduct(data); 
+        // setTimeout(() => {
+        //   setLoading(false);
+        // }, 900); 
+        console.log("XXX")       
         console.log(data)
-        setProducts(data);
+        console.log(product);
       } catch (e) {
         console.log(e.message);
       }
     };
-    fetchPRoducts();
+    fetchProductData();
+    console.log(product);
+
   }, []);
 
   const handleAddToCart = async () => {
     console.log(id)
     console.log(user)
-
     if(!user){
+      //todo - error msg?
       return false;
     }
     try {
@@ -37,44 +48,36 @@ function ProductDetail() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({user: user, product: products, quantity: 1}),
       });
-      // if (!response.ok) {
-      //   const response_data = await response.json();
-      //   console.log(response_data);
-      // }
-      // const data = await response.json();
       console.log(response);
     } catch (e) {
       console.log(e)
     }
-  }
+  };
+  console.log("XXX-1")
+  console.log(product);
   return(
-    <div className="tw-flex tw-min-h-screen tw-items-center tw-justify-center tw-bg-gray-100">
-  <div className="tw-flex tw-font-sans">
-    <div className="tw-flex-none tw-w-48 tw-relative">
-      <img src="https://images.unsplash.com/photo-1699412958387-2fe86d46d394?q=80&w=3329&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover" loading="lazy" />
-    </div>
-    <form className="tw-flex-auto tw-p-6">
-      <div className="tw-flex tw-flex-wrap">
-        <h1 className="tw-flex-auto tw-text-xl ftw-ont-semibold tw-text-gray-900">
-          Pullover Unisex
-        </h1>
-        <div className="tw-text-lg tw-font-semibold tw-text-black-500">
-          $110.00
-        </div>
-        <div className="tw-w-full tw-flex-none tw-text-sm tw-font-medium tw-text-black-700 tw-mt-2">
-          In stock
-        </div>
-      </div>
-      <div className="tw-flex tw-space-x-4 tw-mb-6 tw-text-sm tw-font-medium">
-        <div className="tw-flex-auto tw-flex tw-space-x-4">
-          <button className="tw-h-10 tw-px-6 tw-font-semibold tw-rounded-md tw-border tw-border-balck-800 tw-text-gray-900" type="button" onClick={handleAddToCart}>
-            Add to cart
-          </button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+<>
+<Header />
+<main className="tw-h-[calc(100vh-3.5rem)]">
+{product ?  (
+          <Product
+          id = {id}
+          name = {product.product_name}
+          type = {product.product_type}
+          price = {product.price}
+          img = {product.image_url}
+          quantity = {quantity}
+          handleAddToCart = {handleAddToCart}
+        />) :
+        (
+          <div className="tw-flex tw-h-[calc(100vh-14rem)] tw-items-center tw-justify-center tw--mt-5">
+            <CiShoppingBasket className="tw-animate-pulse tw-w-[20rem] tw-h-[20rem]" />
+          </div>
+        )
+        }
+         <Footer />
+         </main>
+</>
   );
 }
 
