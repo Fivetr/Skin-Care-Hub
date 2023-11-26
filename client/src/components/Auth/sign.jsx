@@ -39,7 +39,12 @@ function sign({ setAuthMenu }) {
       console.log(data);
       dispatch(setUser(data));
       setloading(false);
-      navigate("/");
+      if (data.isAdmin) {
+        navigate("/search");
+      } else {
+        navigate("/");
+      }
+
       toast.success("LOGIN SUCCESSFUL !!!");
     } catch (e) {}
   };

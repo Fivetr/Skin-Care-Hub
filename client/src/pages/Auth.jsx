@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 import Login from "../components/Auth/sign";
 import Register from "../components/Auth/register";
 
@@ -15,6 +16,7 @@ function Auth() {
           <Register setAuthMenu={setAuthMenu} />
         )}
       </section>
+      <Footer />
     </>
   );
 }

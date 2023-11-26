@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import mongoose from "mongoose";
 import AuthRoute from "./router/authentication.js";
-import SearchRoute from "./router/products.js";
+import ProductRoute from "./router/products.js";
 import CartRoute from "./router/cartdetails.js";
 // import CategoryRouter from "./router/categories.js";
 import dotenv from "dotenv";
@@ -33,7 +33,7 @@ app.use(passport.session());
 const port = process.env.PORT || 8080;
 
 app.use("/api/auth", AuthRoute);
-app.use("/api/search", SearchRoute);
+app.use("/api/products", ProductRoute);
 // app.use("/api/categories", CategoryRouter);
 app.use("/api/cart", CartRoute);
 
@@ -44,4 +44,3 @@ app.listen(port, () => {
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGO_URL);
 mongoose.connection.on("error", (e) => console.error(e));
-

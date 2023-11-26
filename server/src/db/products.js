@@ -27,6 +27,36 @@ export const getProductById = async (id) => {
   }
 };
 
+export const addNewProduct = async (product) => {
+  try {
+    const newProduct = new productModel(product);
+    await newProduct.save();
+    return newProduct;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const updateProduct = async (productId, product) => {
+  try {
+    const updatedProduct = productModel.findByIdAndUpdate(productId, product, {
+      new: true,
+    });
+    return updatedProduct;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const deleteProduct = async (productId) => {
+  try {
+    const deletedProduct = productModel.findByIdAndDelete(productId);
+    return deletedProduct;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 // async function updateCleanIngreds() {
 //   try {
 //     // Find documents where clean_ingreds field is a string containing an array

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: {},
   exist: false,
-  isAdmain: false,
+  isAdmin: false,
 };
 
 export const userSlice = createSlice({
@@ -14,12 +14,12 @@ export const userSlice = createSlice({
       // console.log(action.payload)
       state.user = action.payload.user;
       state.exist = true;
-      state.isAdmain = action.payload.isAdmin;
+      state.isAdmin = action.payload.isAdmin;
     },
     offsetUser: (state) => {
       state.user = {};
       state.exist = false;
-      state.isAdmain = false;
+      state.isAdmin = false;
     },
   },
 });
