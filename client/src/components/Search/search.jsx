@@ -35,7 +35,7 @@ function search({
           </button>
         </div>
       </form>
-      <div class="tw-flex">
+      <div className="tw-flex">
         <div>
           <input
             type="number"
@@ -59,7 +59,7 @@ function search({
           />
         </div>
         <div className="tw-ml-4">
-          <select class="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
+          <select className="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
           onChange={(e) => setTypeValue(e.target.value)}
           >
             <option value="Category">Category</option>
@@ -95,7 +95,7 @@ function search({
               fill="currentColor"
               width={25}
               height={25}
-              class="bi bi-plus-circle tw-mr-2 tw-ml-2"
+              className="bi bi-plus-circle tw-mr-2 tw-ml-2"
               viewBox="0 0 16 16"
             >
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
