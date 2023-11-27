@@ -20,7 +20,7 @@ function Product({
         <div class="tw-flex tw-justify-end tw-mt-4 tw-mr-4">
         {true && <span className="tw-flex tw-flex-row tw-items-start tw-mt-4 tw-space-x-4 ">
         <button
-            className="tw-flex tw-items-center tw-text-white tw-w-[2rem] tw-bg-yellow-400 hover:tw-bg-yellow-500 focus:tw-outline-none focus:tw-ring-yellow-200 tw-font-medium tw-rounded-lg tw-text-md" title="Edit product"
+            className="tw-flex tw-items-center tw-text-white tw-w-[2rem] tw-bg-yellow-400 hover:tw-bg-yellow-500 focus:tw-outline-none focus:tw-ring-yellow-200 tw-font-medium tw-rounded-lg tw-text-md"
             onClick={handleDeleteProduct}
           >
            <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} fill="currentColor" class="bi bi-pencil-fill tw-mr-2 tw-ml-2" viewBox="0 0 16 16">
@@ -28,7 +28,7 @@ function Product({
           </svg>
           </button>
         <button
-            className="tw-flex tw-items-center tw-text-white tw-w-[2rem] tw-bg-red-700 hover:tw-bg-red-800 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-md" title="Delete product"
+            className="tw-flex tw-items-center tw-text-white tw-w-[2rem] tw-bg-red-700 hover:tw-bg-red-800 focus:tw-outline-none focus:tw-ring-red-300 tw-font-medium tw-rounded-lg tw-text-md"
             onClick={handleDeleteProduct}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} fill="currentColor" class="bi bi-trash3-fill tw-mr-2 tw-ml-2" viewBox="0 0 16 16">

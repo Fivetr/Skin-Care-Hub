@@ -67,7 +67,7 @@ function NewProductPage() {
     <>
       <Header />
       <main
-        className="tw-h-[calc(90vh-3.5rem)] tw-flex tw-flex-col tw-justify-center tw-items-center"
+        className="tw-h-[calc(90vh-3.5rem)] tw-flex tw-flex-col tw-justify-center tw-items-center tw-overflow-y-scroll"
         style={{ textAlign: "center" }}
       >
         <h2 className="tw-mt-4 tw-text-3xl tw-font-semibold tw-text-gray-800 tw-pb-2">
@@ -147,7 +147,7 @@ function NewProductPage() {
               onChange={(e) => setIngredient(e.target.value)}
             />
             <button
-              className="tw-flex-shrink-0 tw-bg-teal-500 hover:tw-bg-teal-700 tw-border-teal-500 hover:tw-border-teal-700 tw-text-sm tw-border-4 tw-text-white tw-py-1 tw-px-2 tw-rounded-lg"
+              className="tw-flex-shrink-0 tw-mt-3 tw-bg-teal-500 hover:tw-bg-teal-700 tw-border-teal-500 hover:tw-border-teal-700 tw-text-sm tw-border-4 tw-text-white tw-py-1 tw-px-2 tw-rounded-lg"
               type="button"
               onClick={handleAddIngredient}
             >
