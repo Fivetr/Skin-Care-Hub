@@ -17,7 +17,7 @@ import logo from "../../assets/logo.jpg";
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.exist);
-  const currentUser = useSelector(state => state.user.user);
+  const currentUser = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -43,13 +43,16 @@ function Header({ pageBG }) {
   return (
     <>
       <div className="tw-h-14 tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
-        <div className="tw-text-green-50 tw-flex tw-items-center">
+        <div className="tw-text-green-50 tw-flex tw-items-center tw-justify-center">
           <Link to="/">
             <img
               src={logo}
               className="tw-w-[3.5rem] tw-h-[3.5rem] tw-bg-white tw-relative tw--left-5"
             />
           </Link>
+          <span className="tw-font-extrabold tw-text-center tw-text-xl tw-text-black">
+            Hi {currentUser.username}
+          </span>
         </div>
         <button
           className="sm:tw-hidden hover:tw-scale-110 tw-duration-700"
@@ -70,7 +73,7 @@ function Header({ pageBG }) {
             </li>
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
-                <Link to='/mycart' className="tw-text-black">
+                <Link to="/mycart" className="tw-text-black">
                   <FaCartShopping className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </Link>
               ) : (

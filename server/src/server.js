@@ -22,8 +22,8 @@ app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SercetKey,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 app.use(cookieParser(process.env.SercetKey));
