@@ -32,7 +32,6 @@ router.get("/", async (req, res) => {
   }
   shuffleArray(products);
 
-
   let filteredProducts = products;
   if (userInput) {
     filteredProducts = filteredProducts.filter((product) => {
@@ -80,12 +79,19 @@ router.get("/", async (req, res) => {
 // Add new product
 router.post("/", isAdmin, async (req, res) => {
   try {
-    const { product_name, product_type, clean_ingreds, price, image_url } =
-      req.body;
+    const {
+      product_name,
+      product_type,
+      clean_ingreds,
+      price,
+      image_url,
+      quantity,
+    } = req.body;
     const newProduct = {
       product_name,
       product_type,
       clean_ingreds,
+      quantity: parseInt(quantity),
       price: parseFloat(price),
       image_url,
     };
@@ -101,12 +107,19 @@ router.post("/", isAdmin, async (req, res) => {
 router.put("/:id", isAdmin, async (req, res) => {
   try {
     const id = req.params.id;
-    const { product_name, product_type, clean_ingreds, price, image_url } =
-      req.body;
+    const {
+      product_name,
+      product_type,
+      clean_ingreds,
+      price,
+      image_url,
+      quantity,
+    } = req.body;
     const newProduct = {
       product_name,
       product_type,
       clean_ingreds,
+      quantity: parseInt(quantity),
       price: parseFloat(price),
       image_url,
     };

@@ -24,14 +24,14 @@ router.post("/login", async (req, res, next) => {
   })(req, res, next);
 });
 
-// router.get("/profile", (req, res) => {
-//   if (req.isAuthenticated()) {
-//     const user = req.user;
-//     res.json(user);
-//   } else {
-//     res.status(401).json({ msg: "Not authenticated" });
-//   }
-// });
+router.get("/profile", (req, res) => {
+  if (req.isAuthenticated()) {
+    const user = req.user;
+    console.log(res.json(user));
+  } else {
+    res.status(401).json({ msg: "Not authenticated" });
+  }
+});
 
 router.get("/logout", (req, res) => {
   req.logout((e) => {
