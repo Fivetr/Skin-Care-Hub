@@ -58,7 +58,7 @@ function ProductDetail() {
   return(
 <>
 <Header />
-<main className="tw-h-[calc(100vh-3.5rem)]">
+<main className="tw-flex tw-flex-col tw-justify-center tw-items-center">
 {product ?  (
           <>
           <Product
@@ -67,7 +67,8 @@ function ProductDetail() {
           type = {product.product_type}
           price = {product.price}
           img = {product.image_url}
-          quantity = {quantity}
+          ingredients = {product.clean_ingreds}
+          quantity = {product.quantity}
           handleAddToCart = {handleAddToCart}
         />
         <button 
@@ -82,8 +83,8 @@ function ProductDetail() {
           </div>
         )
         }
-         <Footer />
          </main>
+         <Footer />
 </>
   );
 }

@@ -67,7 +67,7 @@ function NewProductPage() {
     <>
       <Header />
       <main
-        className="tw-h-[calc(100vh-3.5rem)] tw-h-screen tw-flex tw-flex-col tw-justify-center tw-items-center"
+        className="tw-h-[calc(90vh-3.5rem)] tw-flex tw-flex-col tw-justify-center tw-items-center"
         style={{ textAlign: "center" }}
       >
         <h2 className="tw-mt-4 tw-text-3xl tw-font-semibold tw-text-gray-800 tw-pb-2">
