@@ -9,6 +9,7 @@ function NewProductPage() {
   const [type, setType] = useState();
   const [price, setPrice] = useState();
   const [image, setImage] = useState();
+  const [qty, setQty] = useState();
   const [ingredient, setIngredient] = useState("");
   const [ingredientsList, setIngredientsList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,6 +41,7 @@ function NewProductPage() {
         product_type: type,
         clean_ingreds: ingredientsList,
         price: price,
+        quantity: qty,
         image_url: image,
       };
       const response = await fetch("/api/products", {
@@ -107,11 +109,21 @@ function NewProductPage() {
           </div>
           <div className="tw-mb-3">
             <input
-              type="text"
+              type="number"
               id="price"
               className="tw-gray-90 tw-w-[17rem] tw-mr-3 tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
               placeholder="Product price"
               onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </div>
+          <div className="tw-mb-3">
+            <input
+              type="number"
+              id="quantity"
+              className="tw-gray-90 tw-w-[17rem] tw-mr-3 tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
+              placeholder="Product quantity"
+              onChange={(e) => setQty(e.target.value)}
               required
             />
           </div>
