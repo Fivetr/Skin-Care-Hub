@@ -73,7 +73,7 @@ function Header({ pageBG }) {
             </li>
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
-                <Link to="/mycart" className="tw-text-black">
+                <Link to={`/mycart/${currentUser._id}`} className="tw-text-black">
                   <FaCartShopping className="tw-w-[1.3rem] tw-h-[1.3rem]" />
                 </Link>
               ) : (

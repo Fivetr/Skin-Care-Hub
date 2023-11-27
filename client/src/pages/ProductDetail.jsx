@@ -46,7 +46,7 @@ function ProductDetail() {
       const response = await fetch("/api/cart/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({user: user, product: products, quantity: 1}),
+        body: JSON.stringify({user: user, product: product, quantity: 1}),
       });
       console.log(response);
     } catch (e) {
@@ -60,6 +60,7 @@ function ProductDetail() {
 <Header />
 <main className="tw-h-[calc(100vh-3.5rem)]">
 {product ?  (
+          <>
           <Product
           id = {id}
           name = {product.product_name}
@@ -68,7 +69,13 @@ function ProductDetail() {
           img = {product.image_url}
           quantity = {quantity}
           handleAddToCart = {handleAddToCart}
-        />) :
+        />
+        <button 
+              className="tw-h-10 tw-px-6 tw-mt-4 tw-font-semibold tw-rounded-md tw-border tw-border-balck-800 tw-text-gray-900" type="button"
+              onClick={handleAddToCart}
+              >
+                Add to cart
+         </button></>) :
         (
           <div className="tw-flex tw-h-[calc(100vh-14rem)] tw-items-center tw-justify-center tw--mt-5">
             <CiShoppingBasket className="tw-animate-pulse tw-w-[20rem] tw-h-[20rem]" />
