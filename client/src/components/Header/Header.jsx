@@ -18,6 +18,7 @@ function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.exist);
   const currentUser = useSelector((state) => state.user.user);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -50,63 +51,54 @@ function Header({ pageBG }) {
               className="tw-w-[3.5rem] tw-h-[3.5rem] tw-bg-white tw-relative tw--left-5"
             />
           </Link>
-          <span className="tw-font-extrabold tw-text-center tw-text-xl tw-text-black">
-            Hi {currentUser.username}
-          </span>
+          {
+            user && <span className="tw-font-semibold tw-text-center tw-text-xl tw-text-gray-500">
+                      Hi, {currentUser.username}
+                    </span>
+          }
+          
         </div>
         <button
           className="sm:tw-hidden hover:tw-scale-110 tw-duration-700"
           onClick={() => setOpen(!Open)}
         >
           {Open ? (
-            <AiFillCloseSquare className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+            <AiFillCloseSquare className="tw-w-[1.5rem] tw-h-[1.5rem]" />
           ) : (
-            <FaBars className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+            <FaBars className="tw-w-[1.5rem] tw-h-[1.5rem]" />
           )}
         </button>
         <nav className="tw-hidden sm:tw-block tw-items-center">
           <ul className="tw-flex tw-items-center tw-gap-6 tw-justify-between tw-h-full">
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               <Link to="/search" className="tw-text-black ">
-                <HiMiniSquares2X2 className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+                <HiMiniSquares2X2 className="tw-w-[1.5rem] tw-h-[1.5rem]" />
               </Link>
             </li>
-            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
-              {user ? (
-                <Link to={`/mycart/${currentUser._id}`} className="tw-text-black">
-                  <FaCartShopping className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+            {
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+                <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-relative">
+                  <FaCartShopping className="tw-w-[1.5rem] tw-h-[1.5rem]" />
+                  <span class="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>1</span>
                 </Link>
-              ) : (
-                <button
-                  onClick={() => toast.error("PLEASES LOGIN FIRST")}
-                  className="tw-flex tw-items-center"
-                >
-                  <FaCartShopping className="tw-w-[1.3rem] tw-h-[1.3rem]" />
-                </button>
-              )}
-            </li>
-            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
-              {user ? (
-                <Link to="/" className="tw-text-black">
-                  <FaRegNewspaper className="tw-w-[1.3rem] tw-h-[1.3rem]" />
-                </Link>
-              ) : (
-                <button
-                  onClick={() => toast.error("PLS LOGIN FIRST")}
-                  className="tw-flex tw-items-center"
-                >
-                  <FaRegNewspaper className="tw-w-[1.3rem] tw-h-[1.3rem]" />
-                </button>
-              )}
-            </li>
+                </li>
+            }
+            {
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+                  <Link to="/" className="tw-text-black">
+                    <FaRegNewspaper className="tw-w-[1.5rem] tw-h-[1.5rem]" />
+                  </Link> 
+                </li>
+            }
+            
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
               {user ? (
                 <button onClick={handleLogout}>
-                  <FiLogOut className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+                  <FiLogOut className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                 </button>
               ) : (
                 <Link to="/auth" className="tw-text-black">
-                  <FiLogIn className="tw-w-[1.3rem] tw-h-[1.3rem]" />
+                  <FiLogIn className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                 </Link>
               )}
             </li>
