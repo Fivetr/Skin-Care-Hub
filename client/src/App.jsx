@@ -24,6 +24,10 @@ function App() {
           path="/products/add"
           element={isAdmin ? <NewProductPage /> : <HomePage />}
         />
+        <Route
+          path="/products/edit/:id"
+          element={isAdmin ? <NewProductPage /> : <HomePage />}
+        />
       </Routes>
     </Router>
   );
