@@ -32,7 +32,7 @@ router.post("/add", async(req, res) => {
                     found = true;
                 }
             })
-            console.log(found);
+            // console.log(found);
             if(found == true){
                 cart.items.map((item) => {
                     if(item.product._id == req.body.product._id){
@@ -43,7 +43,7 @@ router.post("/add", async(req, res) => {
                 cart.items.push(item);
             }
             
-            cart.save().then(() => res.end());
+            cart.save().then(() => res.status(200).json(cart));
         } else{
             Cart.create({
                 userId: user,
@@ -53,7 +53,8 @@ router.post("/add", async(req, res) => {
         }
         
     });
-    return cart;
+    // console.log(cart)
+    // return res.status(200).json(cart);
     
 });
 
