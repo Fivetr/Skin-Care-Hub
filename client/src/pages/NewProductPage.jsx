@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function NewProductPage() {
@@ -13,9 +14,37 @@ function NewProductPage() {
   const [ingredient, setIngredient] = useState("");
   const [ingredientsList, setIngredientsList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const handleAddIngredient = () => {
+  const getProductDetails = async() => {
+    try {
+      const response = await fetch("/api/products/"+id, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" }
+      });
+      console.log("got a response");
+      const data = await response.json();
+      console.log(data);
+      setName(data.product_name);
+      setType(data.product_type);
+      setPrice(data.price);
+      setImage(data.image_url)
+      setQty(data.quantity);
+      setIngredientsList(data.clean_ingreds);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  useEffect(() => {
+    if (id) {
+      console.log("Make api call to get product details");
+      getProductDetails();
+    }
+  }, [id]);
+
+  const handleAddIngredient = (event) => {
+    event.preventDefault();
     if (ingredient.trim() !== "") {
       if (ingredientsList.length < 10) {
         setIngredientsList([...ingredientsList, ingredient]);
@@ -27,12 +56,47 @@ function NewProductPage() {
     }
   };
 
-  const handleDeleteIngredient = (index) => {
+  const handleDeleteIngredient = (index, event) => {
+    event.preventDefault();
     const updatedList = ingredientsList.filter((_, i) => i !== index);
     setIngredientsList(updatedList);
     setIngredient("");
   };
 
+  const addProduct = async(product) => {
+    const response = await fetch("/api/products", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+    console.log(response);
+    if (response.ok) {
+      toast.success("Added product successfully");
+      navigate("/search");
+    } else {
+      console.error("Could not add product");
+    }
+  }
+  const editProduct = async(product) => {
+    const response = await fetch("/api/products/"+id, {
+      method: "PUT",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+    console.log(response);
+    if (response.ok) {
+      toast.success("Edited product successfully");
+      navigate("/search");
+    } else {
+      console.error("Could not add product");
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -44,21 +108,13 @@ function NewProductPage() {
         quantity: qty,
         image_url: image,
       };
-      const response = await fetch("/api/products", {
-        method: "POST",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newProduct),
-      });
-      console.log(response);
-      if (response.ok) {
-        toast.success("Added product successfully");
-        navigate("/search");
-      } else {
-        console.error("Could not add product");
+      if(id) {
+        editProduct(newProduct);
       }
+      else {
+        addProduct(newProduct);
+      }
+      
     } catch (e) {
       console.error("Error in adding product", e);
     }
@@ -67,19 +123,20 @@ function NewProductPage() {
     <>
       <Header />
       <main
-        className="tw-h-[calc(90vh-3.5rem)] tw-flex tw-flex-col tw-justify-center tw-items-center tw-overflow-y-scroll"
+        className={`${!id && 'tw-justify-center'} tw-h-[calc(90vh-3.5rem)] tw-flex tw-flex-col tw-items-center tw-overflow-y-scroll`}
         style={{ textAlign: "center" }}
       >
         <h2 className="tw-mt-4 tw-text-3xl tw-font-semibold tw-text-gray-800 tw-pb-2">
-          Add Product
+          {id ? "Edit" : "Add" } Product
         </h2>
         <form
           onSubmit={handleSubmit}
-          className="tw-w-full tw-max-w-md tw-bg-white tw-rounded tw-px-8 tw-pt-6 tw-pb-8"
+          className="tw-h-[calc(50vh-3.5rem)] tw-w-full tw-max-w-md tw-bg-white tw-rounded tw-px-8 tw-pt-6 tw-pb-8"
         >
           <div className="tw-mb-3">
             <input
               type="text"
+              value={name}
               id="product-name"
               className="tw-gray-90 tw-w-[10rem] tw-mr-5 tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
               placeholder="Product name"
@@ -87,10 +144,11 @@ function NewProductPage() {
               required
             />
             <select
-              class="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
+              className="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
               onChange={(e) => setType(e.target.value)}
+              value={type}
             >
-              <option value="Catergory">Catergory</option>
+              <option value="Category">Category</option>
               <option value="Moisturiser">Moisturiser</option>
               <option value="Serum">Serum</option>
               <option value="Oil">Oil</option>
@@ -111,6 +169,7 @@ function NewProductPage() {
             <input
               type="number"
               id="price"
+              value={price}
               className="tw-gray-90 tw-w-[17rem] tw-mr-3 tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
               placeholder="Product price"
               onChange={(e) => setPrice(e.target.value)}
@@ -121,6 +180,7 @@ function NewProductPage() {
             <input
               type="number"
               id="quantity"
+              value={qty}
               className="tw-gray-90 tw-w-[17rem] tw-mr-3 tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
               placeholder="Product quantity"
               onChange={(e) => setQty(e.target.value)}
@@ -131,6 +191,7 @@ function NewProductPage() {
             <input
               type="text"
               id="image"
+              value={image}
               className="tw-gray-90 tw-w-[17rem] tw-mr-3 tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
               placeholder="Product image url"
               onChange={(e) => setImage(e.target.value)}
@@ -140,7 +201,7 @@ function NewProductPage() {
           <div className="tw-mb-3">
             <input
               type="text"
-              id="image"
+              id="ingredient"
               className="tw-gray-90 tw-w-[17rem] tw-mr-3 tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
               placeholder="Add ingredient"
               value={ingredient}
@@ -149,7 +210,7 @@ function NewProductPage() {
             <button
               className="tw-flex-shrink-0 tw-mt-3 tw-bg-teal-500 hover:tw-bg-teal-700 tw-border-teal-500 hover:tw-border-teal-700 tw-text-sm tw-border-4 tw-text-white tw-py-1 tw-px-2 tw-rounded-lg"
               type="button"
-              onClick={handleAddIngredient}
+              onClick={(e) =>handleAddIngredient(e)}
             >
               Add
             </button>
@@ -163,7 +224,7 @@ function NewProductPage() {
                 {item}
                 <button
                   className="tw-ml-2 tw-text-white-500 hover:tw-text-white-700 focus:tw-outline-none"
-                  onClick={() => handleDeleteIngredient(index)}
+                  onClick={(e) => handleDeleteIngredient(index, e)}
                 >
                   &#x2715;
                 </button>
@@ -178,7 +239,7 @@ function NewProductPage() {
             type="button"
             onClick={handleSubmit}
           >
-            Add Product
+            {id ? "Edit" : "Add" } Product
           </button>
         </form>
       </main>
