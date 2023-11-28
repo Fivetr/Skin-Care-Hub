@@ -1,5 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Product({
   id,
@@ -12,7 +14,22 @@ function Product({
   handleAddToCart
 }) {
   const isAdmin = useSelector((state) => state.user.isAdmin);
-  const handleDeleteProduct = () => {
+  const user = useSelector(state => state.user.exist);
+  const navigate = useNavigate();
+  const handleDeleteProduct = async () => {
+    try {
+      const response = await fetch("/api/products/"+id, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      });
+      toast.success("Deleted product successfully.");
+      console.log(response);
+      navigate("/search")
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  const handleEditProduct = () => {
     
   }
     return (
@@ -78,7 +95,7 @@ function Product({
             {isAdmin && <span className="tw-font-semibold tw-text-md">Available quantity : {quantity}</span>}
         </div>
         {
-          !isAdmin && <button 
+          (user && !isAdmin) && <button 
                   className="tw-flex tw-items-center tw-justify-center tw-text-white tw-end-2.5 tw-bottom-2.5 tw-bg-blue-700 hover:tw-bg-blue-800 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-blue-200 tw-font-medium tw-rounded-lg tw-text-sm tw-px-4 tw-py-2" type="button"
                   onClick={handleAddToCart}
                   >
