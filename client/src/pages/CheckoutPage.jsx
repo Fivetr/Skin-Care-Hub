@@ -10,13 +10,34 @@ function CheckoutPage() {
     const [items, setItems] = useState();
 
     const handleAddToCart = async (product) => {
-        console.log(user)
+        // console.log(user)
         if(!user){
           //todo - error msg?
           return false;
         }
         try {
           const response = await fetch("/api/cart/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({user: user, product: product, quantity: 1}),
+          });
+        //   console.log(response);
+          const data = await response.json();
+        //   console.log(data.items)
+          setItems(data.items)
+        } catch (e) {
+          console.log(e)
+        }
+      };
+
+      const handleRemoveFromCart = async (product) => {
+        // console.log(user)
+        if(!user){
+          //todo - error msg?
+          return false;
+        }
+        try {
+          const response = await fetch("/api/cart/delete", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({user: user, product: product, quantity: 1}),
@@ -37,8 +58,8 @@ function CheckoutPage() {
         items.map((product, index) => {
             return(
             // console.log(product.product._id)
-            <div  key={`${product.product._id}`} className='tw-pt-5 tw-pb-5'>
-                <div className="tw-overflow-hidden tw-rounded-md tw-shadow-lg">
+            <div  key={`${product.product._id}`} className='tw-pt-5 tw-pb-5 tw-w-50'>
+                <div className="tw-overflow-hidden tw-rounded-md tw-shadow-lg tw-w-25">
                     
                     <div className="tw-flex tw-flex-row tw-px-6 tw-py-4 tw-bg-white">
                         <img className="tw-flex-none tw-w-60 tw-h-60 tw-object-cover" src={product.product.image_url} alt={product.product.product_name} />
@@ -56,7 +77,7 @@ function CheckoutPage() {
                         <div className='tw-flex-initial tw-w-70'></div>
                         <span className="tw-bg-green-500 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold">
                             <div className='tw-flex tw-flex-row'>
-                                <button className='tw-flex-none tw-w-10'>-</button>
+                                <button className='tw-flex-none tw-w-10' onClick={() => handleRemoveFromCart(product.product)}>-</button>
                                 <span className='tw-flex-none tw-items-center'>{product.quantity}</span>
                                 <button className='tw-flex-none tw-w-10' onClick={() => handleAddToCart(product.product)}>+</button>
                             </div>
@@ -66,12 +87,33 @@ function CheckoutPage() {
             </div>
         )})
         : null
-    
     )
+
+    const getPrice = () => {
+      let price = 0;
+      // console.log(items)
+      items ?
+        items.map((item, index) => {
+          // console.log(item.product.price);
+          price = price + (item.quantity * item.product.price);
+        })
+      : null
+      return price;
+    }
+
+    const getQuantity = () => {
+      let quantity = 0;
+      items ?
+        items.map((item, index) => {
+          quantity = quantity + item.quantity;
+        })
+      : null
+      return quantity;
+    }
 
     useEffect(() => {
         const getCart = async () => {
-            console.log(user)
+            // console.log(user)
             if(!user){
                 //todo - error msg?
                 return false;
@@ -82,7 +124,7 @@ function CheckoutPage() {
             });
             const data = await response.json();
             setItems(data.items);
-            console.log(data.items)
+            // console.log(data.items)
           } catch (e) {
             console.log(e.message);
           }
@@ -94,18 +136,59 @@ function CheckoutPage() {
     return (
         <>
             <Header />
-            <div className="tw-h-10"></div>
-            <section className="tw-flex tw-tems-center tw-justify-start tw-text-xl tw-border-b tw-border-black tw-h-auto w-50">
-                <div className="tw-flex-none tw-w-24"></div>
-                <div>
-                    {items? renderItems() : null}
-                    {/* {items ? 
-                        <CartDetails 
-                            cart = {items}
-                        />
-                    : null} */}
-                </div>
-            </section>
+            <div className="tw-h-20 tw-w-full tw-flex tw-flex-row">
+              <div className="tw-w-24"></div>
+              <div className="tw-text-2xl tw-font-bold tw-pt-10 tw-pl-1">
+                Shopping Cart ({getQuantity()} items)
+              </div>
+            </div>
+            <div className="tw-flex">
+                <section className="tw-flex tw-tems-center tw-justify-start tw-text-xl tw-border-b tw-border-black tw-h-auto tw-w-75">
+                    <div className="tw-flex-none tw-w-24"></div>
+                    <div>
+                        {items? renderItems() : null}
+                        {/* {items ? 
+                            <CartDetails 
+                                cart = {items}
+                            />
+                        : null} */}
+                    </div>
+                </section>
+
+                <div className="tw-w-10"></div>
+                <section className="tw-tems-center tw-justify-start tw-text-3/4tw-border-b tw-border-black tw-h-auto w-25">
+                  <div className="tw-pt-5 tw-pb-5">
+                    <div className="tw-w-15 rounded overflow-hidden shadow-lg">
+                        
+                        <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+                          <button className="tw-w-3/4 tw-bg-blue-500 tw-hover:bg-blue-700 text-white tw-font-bold py-2 px-6 my-3 tw-rounded-full content-center">
+                              Continue to Checkout
+                          </button>
+                        </div>
+                        <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50"/>
+                        <div className="tw-flex tw-flex-row px-6 py-2 my-1">
+                            <div className="tw-basis-1/12"></div>
+                            <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">Subtotal ({getQuantity()} items)</div>
+                            <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4">${getPrice()}</div>
+                        </div>
+                        
+                        <div className="tw-flex tw-flex-row px-6 pb-2 pt-0">
+                            <div className="tw-basis-1/12"></div>
+                            <div className="tw-text-base mb-2 tw-basis-3/4">Shipping</div>
+                            <div className="tw-font-bold tw-text-base mb-2 tw-basis-1/4 tw-text-green-600">Free</div>
+                        </div>
+                        <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50"/>
+                        <div className="tw-flex tw-flex-row px-6 py-2">
+                            <div className="tw-basis-1/12"></div>
+                            <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">Estimated Total</div>
+                            <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4">${getPrice()}</div>
+                        </div>
+                      
+                    </div>
+                  </div>
+                </section>
+                <div className="tw-w-24"></div>
+            </div>
             <Footer />
         </>
     );
