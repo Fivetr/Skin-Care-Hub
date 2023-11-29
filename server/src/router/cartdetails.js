@@ -22,7 +22,7 @@ router.post("/add", async(req, res) => {
         quantity: req.body.quantity
     }
     let found = false;
-    // console.log(user)
+    // console.log(item)
     const cart = await Cart.findOne({ userId: user })
     .then((cart) => {
         if(cart){
@@ -43,6 +43,38 @@ router.post("/add", async(req, res) => {
                 cart.items.push(item);
             }
             
+            cart.save().then(() => res.status(200).json(cart));
+        } else{
+            Cart.create({
+                userId: user,
+                items: [item]
+            })
+            .then(() => res.end());
+        }
+        
+    });
+    // console.log(cart)
+    // return res.status(200).json(cart);
+    
+});
+
+router.post("/delete", async(req, res) => {
+    // console.log(req.body.user.user._id)
+    const user = req.body.user.user._id;
+    // console.log(user)
+    await Cart.findOne({ userId: user })
+    .then((cart) => {
+        if(cart){
+            cart.items.map((item, index) => {
+
+                if(item.product._id == req.body.product._id){
+                    item.quantity = item.quantity - 1;
+                }
+
+                if(item.quantity == 0){
+                    cart.items.splice(index, 1);
+                }
+            })
             cart.save().then(() => res.status(200).json(cart));
         } else{
             Cart.create({
