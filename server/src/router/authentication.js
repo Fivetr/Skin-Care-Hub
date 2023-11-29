@@ -27,7 +27,7 @@ router.post("/login", async (req, res, next) => {
 router.get("/profile", (req, res) => {
   if (req.isAuthenticated()) {
     const user = req.user;
-    console.log(res.json(user));
+    console.log(user.username);
   } else {
     res.status(401).json({ msg: "Not authenticated" });
   }

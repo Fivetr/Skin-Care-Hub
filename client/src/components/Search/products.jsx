@@ -7,11 +7,12 @@ function products({ Products, handleLeft, handleRight, Page }) {
     <div className="tw-flex tw-flex-col tw-items-stretch tw-justify-between tw-container tw-mx-auto tw-mt-6 tw-min-h-[calc(100vh-14rem)] ">
       <div className="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 xl:tw-grid-cols-3 tw-gap-8 tw-place-items-center ">
         {Products?.slice(Page * 10 - 10, Page * 10).map(
-          ({ image_url, product_name, _id }) => (
+          ({ image_url, product_name, price, _id }) => (
             <ProductCard
               key={_id}
               product_name={product_name}
               image_url={image_url}
+              price={price}
               id={_id}
             />
           )
