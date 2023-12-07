@@ -19,19 +19,19 @@ router.post("/login", async (req, res, next) => {
       }
       return res
         .status(200)
-        .json({ msg: "Login successful", isAdmin: user.isAdmin });
+        .json({ msg: "Login successful", isAdmin: user.isAdmin, user });
     });
   })(req, res, next);
 });
 
-// router.get("/profile", (req, res) => {
-//   if (req.isAuthenticated()) {
-//     const user = req.user;
-//     res.json(user);
-//   } else {
-//     res.status(401).json({ msg: "Not authenticated" });
-//   }
-// });
+router.get("/profile", (req, res) => {
+  if (req.isAuthenticated()) {
+    const user = req.user;
+    console.log(user.username);
+  } else {
+    res.status(401).json({ msg: "Not authenticated" });
+  }
+});
 
 router.get("/logout", (req, res) => {
   req.logout((e) => {

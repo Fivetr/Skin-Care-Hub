@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema({
   product_type: String,
   clean_ingreds: [String],
   price: Number,
+  quantity: Number,
   image_url: String,
 });
 
@@ -22,6 +23,36 @@ export const getProductById = async (id) => {
   try {
     const product = await productModel.findById(id);
     return product;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const addNewProduct = async (product) => {
+  try {
+    const newProduct = new productModel(product);
+    await newProduct.save();
+    return newProduct;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const updateProduct = async (productId, product) => {
+  try {
+    const updatedProduct = productModel.findByIdAndUpdate(productId, product, {
+      new: true,
+    });
+    return updatedProduct;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const deleteProduct = async (productId) => {
+  try {
+    const deletedProduct = productModel.findByIdAndDelete(productId);
+    return deletedProduct;
   } catch (e) {
     console.error(e);
   }

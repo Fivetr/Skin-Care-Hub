@@ -10,7 +10,11 @@ function SearchPage() {
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState();
   const [searchInput, setSearchInput] = useState();
+  const [minPriceInput, setMinPriceInput] = useState();
+  const [maxPriceInput, setMaxPriceInput] = useState();
+  const [typeValue, setTypeValue] = useState();
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchPRoducts = async () => {
       try {
@@ -54,11 +58,43 @@ function SearchPage() {
       console.log(e.message);
     }
   };
+
+  const handleFilter = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      let apiUri = '/api/products?'
+      if(searchInput) {
+        apiUri+=`userInput=${searchInput}&`
+      }
+      if(minPriceInput && parseFloat(minPriceInput) > 0) {
+        apiUri+=`minPrice=${minPriceInput}&`
+      } 
+      if(maxPriceInput && parseFloat(maxPriceInput) > 0) {
+        apiUri+=`maxPrice=${maxPriceInput}&`
+      } 
+      if(typeValue != 'Category') {
+        apiUri+=`type=${typeValue}&`
+      } 
+      const response = await fetch(apiUri);
+      const data = await response.json();
+      setProducts(data);
+      setPage(1);
+      setMaxPage(Math.ceil(data.length / 10));
+      setTimeout(() => {
+        setLoading(false);
+      }, 900);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+  
+  
   return (
     <>
       <Header />
       <main className="tw-h-[calc(100vh-3.5rem)]">
-        <Search handleSubmit={handleSubmit} setSearchInput={setSearchInput} />
+        <Search handleSubmit={handleSubmit} setSearchInput={setSearchInput} setMinPriceInput={setMinPriceInput} setMaxPriceInput={setMaxPriceInput} setTypeValue={setTypeValue} handleFilter={handleFilter}/>
         {loading ? (
           <div className="tw-flex tw-h-[calc(100vh-14rem)] tw-items-center tw-justify-center tw--mt-5">
             <CiShoppingBasket className="tw-animate-pulse tw-w-[20rem] tw-h-[20rem]" />
