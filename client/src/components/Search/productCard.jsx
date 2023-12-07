@@ -9,7 +9,7 @@ function productCard({ id, product_name, price, image_url, quantity }) {
   return (
     <div
       onClick={() => handleClick(id)}
-      className={`${quantity<=0 && 'tw-opacity-30'} tw-p-10 tw-cursor-pointer tw-relative hover:tw-ring-2 hover:tw-ring-gray-400 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow tw-w-[24rem] tw-h-[20rem] tw-flex-col tw-flex tw-gap-2 tw-justify-center tw-items-center`}
+      className={`${quantity<=0 && 'tw-opacity-30'} tw-p-10 tw-m-3 tw-cursor-pointer tw-relative hover:tw-ring-2 hover:tw-ring-gray-400 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow md:tw-w-[24rem] lg:tw-w-[24rem] tw-h-[20rem] tw-flex-col tw-flex tw-gap-2 tw-justify-center tw-items-center`}
     >
       <div className="tw-absolute tw-font-bold tw-text-lg tw-top-2 tw-right-4">{`$${price}`}</div>
       <h2 className="tw-mb-2 tw-text-[1.34rem] tw-font-bold tw-tracking-tight tw-text-gray-900">
