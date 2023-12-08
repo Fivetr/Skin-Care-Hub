@@ -58,8 +58,8 @@ function search({
             onChange={(e) => setMaxPriceInput(e.target.value)}
           />
         </div>
-        <div className="tw-ml-4">
-          <select className="tw-gray-90 tw-w-[7rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
+        <div className="lg:tw-ml-4">
+          <select className="tw-gray-90 tw-w-[8rem] tw-mt-4 tw-border tw-border-gray-300 tw-bg-gray-50 hover:tw-bg-gray-80 tw-font-medium tw-rounded-lg tw-text-sm tw-px-2 tw-py-2"
           onChange={(e) => setTypeValue(e.target.value)}
           >
             <option value="Category">Category</option>
@@ -81,7 +81,7 @@ function search({
         </div>
 
           <button
-            className="tw-text-white tw-w-[7rem] tw-ml-4 tw-mt-4 tw-bg-blue-700 hover:tw-bg-blue-800  focus:tw-outline-none focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm"
+            className="tw-text-white tw-w-[8rem] tw-ml-4 tw-mt-4 tw-bg-blue-700 hover:tw-bg-blue-800  focus:tw-outline-none focus:tw-ring-blue-300 tw-font-medium tw-rounded-lg tw-text-sm"
             onClick={handleFilter}
           >
             Apply Filter
@@ -89,7 +89,7 @@ function search({
        
           {isAdmin && (
             <button
-              className="tw-flex tw-items-center tw-text-white tw-w-[9rem] tw-ml-4 tw-mt-4 tw-bg-teal-700 hover:tw-bg-teal-800  focus:tw-outline-none focus:tw-ring-teal-300 tw-font-medium tw-rounded-lg tw-text-sm"
+              className="tw-flex tw-items-center tw-text-white tw-w-[9rem] lg:tw-ml-4 tw-mt-4 tw-bg-teal-700 hover:tw-bg-teal-800  focus:tw-outline-none focus:tw-ring-teal-300 tw-font-medium tw-rounded-lg tw-text-sm"
               onClick={handleAddProduct}
             >
               <svg
