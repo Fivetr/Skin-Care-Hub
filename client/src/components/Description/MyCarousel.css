@@ -1,51 +1,95 @@
-.carousel-container {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  
-  .carousel-image {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .slick-slider {
-    margin: 0;
-    padding: 0;
-  }
+/* MyCarousel.css */
 
-  .slick-dots {
-    bottom: 15px;
-  }
-  
-  .slick-dots li button:before {
-    font-size: 10px;
-    color: #fff;
-  }
-  
-  .slick-prev,
-  .slick-next {
-    font-size: 0; /* Hide the default arrow text */
-    background: transparent;
-    border: none;
-    outline: none;
-    color: transparent;
-    cursor: pointer;
-    z-index: 1;
-  }
-  
-  .slick-prev:before,
-  .slick-next:before {
-    font-size: 24px;
-    color: #fff;
-  }
-  
-  .slick-prev {
-    left: 10px;
-  }
-  
-  .slick-next {
-    right: 10px;
-  }
-  
+.carousel-container {
+  width: 100%;
+  height: 40%;
+  margin: -10px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.image-container {
+  position: relative;
+}
+
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flexbox;
+  align-items:center;
+  justify-content:center;
+}
+
+.overlay-container h1 {
+  text-align: left;
+  margin-top: 25%;
+  margin-left: 5%;
+}
+
+.overlay-container button {
+  text-align: left;
+  margin-top: 0;
+  margin-left: 5%;
+  border-color: white;
+  padding: 10px 10px;
+  border-width: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.slick-slider {
+  margin: 0;
+  padding: 0;
+}
+
+.slick-dots {
+  bottom: 15px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #fff;
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 0; /* Hide the default arrow text */
+  background: transparent;
+  border: none;
+  outline: none;
+  color: transparent;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px;
+  color: #fff;
+}
+
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  right: 10px;
+}
+
+.carousel-slide {
+  display: flex;
+}
+
+.image-container {
+  width: 100%;
+  height: 35%; /* Adjusted to be 30% smaller (70% of the original height) */
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+}

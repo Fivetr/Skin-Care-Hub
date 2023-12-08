@@ -13,30 +13,26 @@ function MyCarousel() {
     slidesToScroll: 1,
   };
 
+  const CarouselSlide = ({ image, text, location }) => {
+    return (
+      <div className="carousel-slide">
+        <div className="image-container">
+          <img className="carousel-image" src={image} alt="Creams" />
+          <div className="overlay-container">
+            <h1>{text}</h1>
+            <button className="btn-primary" onClick={() => window.location.href = location}>Click here to know more</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="carousel-container">
       <Slider {...settings}>
-        <div>
-          <img
-            className="carousel-image"
-            src="/Images/Carousel1.png"
-            alt="Creams"
-          />
-        </div>
-        <div>
-          <img
-            className="carousel-image"
-            src="/Images/Carousel2.png"
-            alt="Serums"
-          />
-        </div>
-        <div>
-          <img
-            className="carousel-image"
-            src="/Images/Carousel3.png"
-            alt="Model"
-          />
-        </div>
+        <CarouselSlide image="/Images/Picture1.png" text="Discover more creams" location="https://www.cerave.com/" />
+        <CarouselSlide image="/Images/Picture2.png" text="Shop our new skincare collection" location="https://www.cetaphil.com/us/" />
+        <CarouselSlide image="/Images/Picture3.png" text="Check out our new range" location="https://www.firstaidbeauty.com/" />
       </Slider>
     </div>
   );
