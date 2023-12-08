@@ -90,7 +90,7 @@ function sign({ setAuthMenu }) {
       />
       <div className="tw-flex tw-justify-evenly">
         <button
-          className=" tw-inline-block tw-cursor-pointer tw-rounded-md tw-border-2 tw-border-cyan-200 tw-bg-cyan-100 tw-px-3 tw-py-1 tw-no-underline tw-shadow-md tw-shadow-cyan-300 tw-duration-500 hover:tw-bg-cyan-300 tw-w-[32%] tw-h-10 tw-text-center tw-font-medium hover:tw-scale-105"
+          className="tw-mt-4 tw-inline-block tw-cursor-pointer tw-rounded-md tw-border-2 tw-border-cyan-200 tw-bg-cyan-100 tw-px-3 tw-py-1 tw-no-underline tw-shadow-md tw-shadow-cyan-300 tw-duration-500 hover:tw-bg-cyan-300 tw-w-[32%] tw-h-10 tw-text-center tw-font-medium hover:tw-scale-105"
           onClick={() => setAuthMenu(false)}
         >
           Register
