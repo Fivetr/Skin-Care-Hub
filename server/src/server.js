@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import AuthRoute from "./router/authentication.js";
 import ProductRoute from "./router/products.js";
 import CartRoute from "./router/cartdetails.js";
+import TransactionRoute from "./router/transaction.js";
 // import CategoryRouter from "./router/categories.js";
 import dotenv from "dotenv";
 import passport from "passport";
@@ -36,6 +37,7 @@ app.use("/api/auth", AuthRoute);
 app.use("/api/products", ProductRoute);
 // app.use("/api/categories", CategoryRouter);
 app.use("/api/cart", CartRoute);
+app.use("/api/transaction", TransactionRoute);
 
 app.listen(port, () => {
   console.log("server started on port", port);
