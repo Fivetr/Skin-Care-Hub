@@ -1,55 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import CartDetails from "../components/Checkout/Cart";
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
-function CheckoutPage() {
+function PaymentPage() {
   const user = useSelector((state) => state.user);
   const [items, setItems] = useState();
-  const navigate = useNavigate();
 
-  const handleAddToCart = async (product) => {
-    // console.log(user)
-    if (!user) {
-      //todo - error msg?
-      return false;
-    }
-    try {
-      const response = await fetch("/api/cart/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: user, product: product, quantity: 1 }),
-      });
-      //   console.log(response);
-      const data = await response.json();
-      //   console.log(data.items)
-      setItems(data.items);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const handleRemoveFromCart = async (product) => {
-    // console.log(user)
-    if (!user) {
-      //todo - error msg?
-      return false;
-    }
-    try {
-      const response = await fetch("/api/cart/delete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: user, product: product, quantity: 1 }),
-      });
-      //   console.log(response);
-      const data = await response.json();
-      //   console.log(data.items)
-      setItems(data.items);
-    } catch (e) {
-      console.log(e);
-    }
+  const initialOptions = {
+    clientId: "",
+    currency: "USD",
+    disableFunding: 'credit,card'
   };
 
   const renderItems = () =>
@@ -85,25 +48,6 @@ function CheckoutPage() {
                 </div>
                 <div className="tw-flex tw-justify-between tw-items-center tw-px-6 tw-py-2 tw-text-white">
                   <div className="tw-flex-initial tw-w-70"></div>
-                  <span className="tw-bg-green-500 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold">
-                    <div className="tw-flex tw-flex-row">
-                      <button
-                        className="tw-flex-none tw-w-10"
-                        onClick={() => handleRemoveFromCart(product.product)}
-                      >
-                        -
-                      </button>
-                      <span className="tw-flex-none tw-items-center">
-                        {product.quantity}
-                      </span>
-                      <button
-                        className="tw-flex-none tw-w-10"
-                        onClick={() => handleAddToCart(product.product)}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </span>
                 </div>
               </div>
             </div>
@@ -113,7 +57,7 @@ function CheckoutPage() {
 
   const getPrice = () => {
     let price = 0;
-    console.log(items)
+    // console.log(items)
     items
       ? items.map((item, index) => {
           // console.log(item.product.price);
@@ -133,9 +77,65 @@ function CheckoutPage() {
     return quantity;
   };
 
-  const handleCheckout = () => {
-    navigate(`/mycart/${user.user._id}/review`);
+  const generateUnits = () => (
+    // console.log("Inseide")
+    // console.log(items)
+    [{
+        description: "Skin-Care Products",
+        amount: {
+            currency_code: "USD",
+            value: getPrice(),
+            breakdown: {
+                item_total: {
+                    currency_code: "USD",
+                    value: getPrice()
+                }
+            }
+        },
+        items: generateItems()
+    }]
+  );
+
+  const generateItems = () => {
+    
+    if(items){ 
+      let itemslist = items.map((item)=>(
+          {
+              unit_amount: {
+                  currency_code: "USD",
+                  value: item.product.price
+              },
+              quantity: item.quantity,
+              name: item.product.product_name
+          }
+      ));
+      return itemslist;
+    }else{
+      return null;
+    }
+  }
+
+  const onApprove = async (data) => {
+    console.log(data.orderID)
+    if (!user) {
+      //todo - error msg?
+      return false;
+    }
+    try {
+      const response = await fetch("/api/transaction/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: user, orderID: data.orderID }),
+      });
+      //   console.log(response);
+      // const data = await response.json();
+      // console.log(data)
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  
 
   useEffect(() => {
     const getCart = async () => {
@@ -158,12 +158,32 @@ function CheckoutPage() {
     getCart();
   }, []);
 
+//   useEffect(() => {
+//     const getUser = async () => {
+//       // console.log(user)
+//       try {
+//         const response = await fetch(`/api/auth/profile`, {
+//           method: "GET",
+//         });
+//         const data = await response.json();
+//         // setItems(data.items);
+//         console.log("Inside")
+//         console.log(data)
+//       } catch (e) {
+//         console.log(e.message);
+//       }
+//     };
+//     getUser();
+//   }, []);
+
   return (
     <>
       <Header />
+      {items ?
+      <>
       <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
         <div className="tw-text-base lg:tw-text-2xl md:tw-text-xl tw-font-bold tw-pt-10">
-          Shopping Cart ({getQuantity()} items)
+          Review Order
         </div>
       </div>
       <div className=" tw-h-auto tw-max-w-[1440px]  tw-mx-auto">
@@ -182,11 +202,16 @@ function CheckoutPage() {
           <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[5rem] tw-justify-center tw-h-[20rem] tw-text-3/4  ">
             <div className="tw-pt-5 tw-pb-5 lg:tw-w-[25rem] tw-w-[20rem] md:tw-w-[23rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
               <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <button className="tw-w-3/4 tw-bg-blue-500  tw-hover:bg-blue-700 text-white tw-font-bold py-2 px-6 my-3 tw-rounded-full content-center"
-                  onClick={handleCheckout}
-                >
-                  Continue to Checkout
-                </button>
+              <PayPalScriptProvider options={initialOptions} className="tw-w-3/4">
+                <PayPalButtons 
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                          purchase_units: generateUnits()
+                      })
+                  }}
+                  onApprove={onApprove}
+                />
+              </PayPalScriptProvider>
               </div>
               <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
               <div className="tw-flex tw-flex-row px-6 py-2 my-1">
@@ -220,9 +245,11 @@ function CheckoutPage() {
           </section>
         </div>
       </div>
+      </>
+      : null}
       <Footer />
     </>
   );
 }
 
-export default CheckoutPage;
+export default PaymentPage;

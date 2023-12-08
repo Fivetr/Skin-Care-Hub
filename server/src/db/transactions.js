@@ -2,17 +2,12 @@ import mongoose from "mongoose";
 
 const transactionSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    email: { type: String, required: true },
+    orderId: { type: String, required: true },
     orderData: { type: Array, required: true, default: [] },
     date: { type: Date, default: Date.now }
 });
 
-const transactionModel = mongoose.model("transactions", transactionSchema);
+const Transaction = mongoose.model("Transaction", transactionSchema);
 
-export const getTransactionsByUser = async () => {
-    try {
-      const users = await transactionModel.find({});
-      return users;
-    } catch (error) {
-      console.error(error);
-    }
-};
+export default Transaction;
