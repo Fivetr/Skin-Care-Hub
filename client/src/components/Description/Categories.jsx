@@ -3,72 +3,72 @@ import { Link } from "react-router-dom";
 
 const categories = [
   {
-    image: "/Images/00001Image.jpg",
+    image: "/Images/00001Image.png",
     title: "Moisturiser",
     to: "/search",
   },
   {
-    image: "/Images/00008Image.jpg",
+    image: "/Images/00008Image.png",
     title: "Serum",
     to: "/search",
   },
   {
-    image: "/Images/00009Image.jpg",
+    image: "/Images/00009Image.png",
     title: "Oil",
     to: "/search",
   },
   {
-    image: "/Images/00007Image.jpg",
+    image: "/Images/00007Image.png",
     title: "Mist",
     to: "/search",
   },
   {
-    image: "/Images/00006Image.jpg",
+    image: "/Images/00006Image.png",
     title: "Balm",
     to: "/search",
   },
   {
-    image: "/Images/00005Image.jpg",
+    image: "/Images/00005Image.png",
     title: "Mask",
     to: "/search",
   },
   {
-    image: "/Images/00004Image.jpg",
+    image: "/Images/00004Image.png",
     title: "Peel",
     to: "/search",
   },
   {
-    image: "/Images/00003Image.jpg",
+    image: "/Images/00003Image.png",
     title: "Eye Care",
     to: "/search",
   },
   {
-    image: "/Images/00002Image.jpg",
+    image: "/Images/00002Image.png",
     title: "Cleanser",
     to: "/search",
   },
   {
-    image: "/Images/00014Image.jpg",
+    image: "/Images/00014Image.png",
     title: "Toner",
     to: "/search",
   },
   {
-    image: "/Images/00013Image.jpg",
+    image: "/Images/00013Image.png",
     title: "Exfoliator",
     to: "/search",
   },
   {
-    image: "/Images/00012Image.jpg",
+    image: "/Images/00012Image.png",
     title: "Bath Salts",
     to: "/search",
   },
   {
-    image: "/Images/00011Image.jpg",
+    image: "/Images/00011Image.png",
     title: "Body Wash",
     to: "/search",
   },
   {
-    image: "/Images/00010Image.jpg",
+    image: "/Images/00010Image.png",
     title: "Bath Oil",
     to: "/search",
   },
