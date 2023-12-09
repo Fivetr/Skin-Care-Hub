@@ -20,7 +20,7 @@ function MyCarousel() {
           <img className="carousel-image" src={image} alt="Creams" />
           <div className="overlay-container">
             <h1>{text}</h1>
-            <button className="btn-primary" onClick={() => window.location.href = location}>Click here to know more</button>
+            <button className="btn-primary" onClick={() => window.location.href = location}>Know more</button>
           </div>
         </div>
       </div>
