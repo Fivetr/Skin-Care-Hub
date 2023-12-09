@@ -8,6 +8,28 @@ let clientSecret = process.env.PAYPAL_CLIENT_SECRET;
 
 const router = express.Router();
 
+router.get("/myorders/:id", async (req, res) => {
+  const user = req.params.id;
+  // console.log(req.session.user);
+  const transaction = await Transaction.find({ userId: user }).sort({ date : -1 } );
+  if(transaction){
+      return res.status(200).json(transaction);
+  }else {
+      res.status(404).json({ error: "Transaction not found" });
+  }
+});
+
+router.get("/order/:id", async (req, res) => {
+  const transactionId = req.params.id;
+  // console.log(req.session.user);
+  const transaction = await Transaction.findOne({ _id: transactionId });
+  if(transaction){
+      return res.status(200).json(transaction);
+  }else {
+      res.status(404).json({ error: "Transaction not found" });
+  }
+});
+
 router.post("/", async(req, res) => {
     // console.log(req.body.orderID);
     try{        
