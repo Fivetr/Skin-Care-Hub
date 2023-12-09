@@ -65,6 +65,7 @@ function Header({ pageBG }) {
         <button
           className="sm:tw-hidden hover:tw-scale-110 tw-duration-700"
           onClick={() => setOpen(!Open)}
+          title="Menu"
         >
           {Open ? (
             <AiFillCloseSquare className="tw-w-[1.5rem] tw-h-[1.5rem]" />
@@ -74,13 +75,14 @@ function Header({ pageBG }) {
         </button>
         <nav className="tw-hidden sm:tw-block tw-items-center">
           <ul className="tw-flex tw-items-center tw-gap-6 tw-justify-between tw-h-full">
-            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Search">
               <Link to="/search" className="tw-text-black ">
                 <HiMiniSquares2X2 className="tw-w-[1.5rem] tw-h-[1.5rem]" />
               </Link>
             </li>
             {
-              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700"
+              title="Cart">
                 <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-relative">
                   <FaCartShopping className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                   <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>1</span>
@@ -88,14 +90,14 @@ function Header({ pageBG }) {
                 </li>
             }
             {
-              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Home">
                   <Link to="/" className="tw-text-black">
                     <FaRegNewspaper className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                   </Link> 
                 </li>
             }
             
-            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Login/Logout">
               {user ? (
                 <button onClick={handleLogout}>
                   <FiLogOut className="tw-w-[1.5rem] tw-h-[1.5rem]" />
@@ -123,21 +125,27 @@ function Header({ pageBG }) {
           <nav className="tw-mx-auto tw-w-[18rem] tw-rounded-lg tw-border-gray-200">
             <ul className="tw-mb-0">
               <Link to="/auth" className="tw-text-black tw-no-underline" onClick={user && {handleLogout}}>
-                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg">
-                  Login/Logout
+                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg"
+                title="Login/Logout"
+                >
                   <FiLogIn />
                 </li>
               </Link>
               <Link to="/search" className="tw-text-black tw-no-underline">
-                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200">
+                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
+                title="Products"
+                >
                   Products
                   <HiMiniSquares2X2 />
                 </li>
               </Link>
-              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200">
+              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
+              title="Cart">
                 Cart <FaCartShopping />
               </li>}
-              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg ">
+              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg"
+              title="Orders"
+              >
                 Orders <FaRegNewspaper />
               </li>}
             </ul>
