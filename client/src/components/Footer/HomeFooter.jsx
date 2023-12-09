@@ -19,25 +19,25 @@ function HomeFooter() {
         <a href="/login" className="tw-text-gray-600 hover:tw-text-green-500">
           Login
         </a>
-        <a href="/" className="tw-text-gray-600 hover:tw-text-blue-400 tw-mb-2">
+        <a href="/" className="tw-text-gray-600 hover:tw-text-green-500 tw-mb-2">
           Privacy Policy
         </a>
-        <a href="/" className="tw-text-gray-600 hover:tw-text-blue-400">
+        <a href="/" className="tw-text-gray-600 hover:tw-text-green-500">
           Terms & Conditions
         </a>
       </div>
 
       <div className="tw-flex tw-flex-col tw-justify-evenly">
-        <a href="/learn-more" className="tw-text-gray-600 hover:tw-text-blue-500 tw-mb-2">
+        <a href="/learn-more" className="tw-text-gray-600 hover:tw-text-green-500 tw-mb-2">
           Learn More
         </a>
-        <a href="/" className="tw-text-gray-600 hover:tw-text-blue-500">
+        <a href="/" className="tw-text-gray-600 hover:tw-text-green-500">
           Contact Us
         </a>
-        <a href="/" className="tw-text-gray-600 hover:tw-text-blue-500">
+        <a href="/" className="tw-text-gray-600 hover:tw-text-green-500">
           Countries & Regions
         </a>
-        <a href="/" className="tw-text-gray-600 hover:tw-text-blue-500">
+        <a href="/" className="tw-text-gray-600 hover:tw-text-green-500">
           FAQ
         </a>
       </div>
@@ -48,7 +48,7 @@ function HomeFooter() {
             <FaFacebook className="tw-w-6 tw-h-6 tw-text-gray-600 hover:tw-text-blue-500" />
           </a>
           <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-            <FaTwitter className="tw-w-6 tw-h-6 tw-text-gray-600 hover:tw-text-blue-400" />
+            <FaTwitter className="tw-w-6 tw-h-6 tw-text-gray-600 hover:tw-text-blue-300" />
           </a>
           <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="tw-w-6 tw-h-6 tw-text-gray-600 hover:tw-text-pink-500" />
@@ -56,7 +56,7 @@ function HomeFooter() {
         </div>
 
         <p className="tw-mt-2 tw-text-gray-600">
-          &copy; {2023} Clean Skin Care
+          &copy; {2023} Skin Care Hub
         </p>
       </div>
     </div>
