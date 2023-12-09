@@ -45,15 +45,13 @@ function Header({ pageBG }) {
     <>
       <div className="tw-h-14 tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
         <div className="tw-text-green-50 tw-flex tw-items-center tw-justify-center">
-          <Link to="/">
-            <div className="tw-flex tw-items-center">
+            <div className="tw-flex tw-items-center" onClick={() => navigate("/")}>
               <img
                 src={logo}
                 className="tw-w-[3.5rem] tw-h-[3.5rem] tw-bg-white"
               />
-              <h1 className="tw-ml-5 tw-text-xl tw-font-bold tw-text-gray-600 hover:tw-text-green-500 tw-no-underline">Skin Care Hub</h1>
+              <h1 className="tw-ml-5 tw-text-xl tw-font-bold tw-text-gray-600 hover:tw-cursor-pointer tw-no-underline">Skin Care Hub</h1>
             </div>
-          </Link>
           </div>
           {user && (
             <div className="tw-flex tw-justify-center">
