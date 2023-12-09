@@ -4,7 +4,6 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import CartDetails from "../components/Checkout/Cart";
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 function PaymentPage() {
@@ -133,7 +132,7 @@ function PaymentPage() {
         // console.log(response);
         if(response.ok){
           toast.success("Order Placed Successfully!");
-          navigate("/search");
+          navigate(`/myorders/${user.user._id}`);
         }
       // const resp = await response.json();
       // // if(resp.status)
@@ -199,11 +198,6 @@ function PaymentPage() {
           <section className="tw-flex tw-mx-auto tw-items-center tw-justify-center tw-text-xl tw-h-auto">
             <div>
               {items ? renderItems() : null}
-              {/* {items ? 
-                            <CartDetails 
-                                cart = {items}
-                            />
-                        : null} */}
             </div>
           </section>
 

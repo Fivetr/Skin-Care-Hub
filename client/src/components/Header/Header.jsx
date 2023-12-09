@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { FaCartShopping, FaRegNewspaper } from "react-icons/fa6";
+import { FaCartShopping, FaRegNewspaper, FaClockRotateLeft } from "react-icons/fa6";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { useState } from "react";
 import { Transition } from "@headlessui/react";
@@ -12,13 +12,16 @@ import { useDispatch } from "react-redux";
 import { offsetUser } from "../../redux/features/auth/userSlice";
 import { useNavigate } from "react-router-dom";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
+import { useEffect } from 'react';
 import logo from "../../assets/logo.jpg";
+import { setItemCount } from "../../redux/features/auth/cartSlice";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.exist);
   const currentUser = useSelector((state) => state.user.user);
   const isAdmin = useSelector((state) => state.user.isAdmin);
+  const count = useSelector((state) => state.cart.itemCount);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMobile = window.innerWidth <= 768;
@@ -42,6 +45,27 @@ function Header({ pageBG }) {
       console.error("Error logging out:", e);
     }
   };
+  useEffect(() => {
+    const getCart = async () => {
+      if(!user){
+          return false;
+        }
+    try {
+          const response = await fetch(`/api/cart/mycart/${currentUser._id}`, {
+          method: "GET"
+      });
+      const data = await response.json();
+      let total = 0;
+      data.items.map((item) => {
+        total += item.quantity;
+      })
+      dispatch(setItemCount({ itemCount: total}));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+  getCart();
+  }, [])
   return (
     <>
       <div className="tw-h-14 tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
@@ -86,8 +110,15 @@ function Header({ pageBG }) {
               title="Cart">
                 <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-relative">
                   <FaCartShopping className="tw-w-[1.5rem] tw-h-[1.5rem]" />
-                  <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>1</span>
+                  <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>{count}</span>
                 </Link>
+                </li>
+            }
+            {
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+                  <Link to={`/myorders/${currentUser._id}`} className="tw-text-black">
+                    <FaClockRotateLeft className="tw-w-[1.5rem] tw-h-[1.5rem]" />
+                  </Link> 
                 </li>
             }
             {
@@ -142,12 +173,16 @@ function Header({ pageBG }) {
               </Link>
               {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
               title="Cart">
-                Cart <FaCartShopping />
+                <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-no-underline">
+                  Cart <FaCartShopping />
+                </Link>
               </li>}
               {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg"
               title="Orders"
               >
-                Orders <FaRegNewspaper />
+                <Link to={`/myorders/${currentUser._id}`} className="tw-text-black tw-no-underline">
+                  Orders <FaRegNewspaper />
+                </Link>
               </li>}
             </ul>
           </nav>

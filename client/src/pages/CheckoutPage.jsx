@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import CartDetails from "../components/Checkout/Cart";
+import { CiShoppingCart } from "react-icons/ci";
+import { setItemCount } from "../redux/features/auth/cartSlice";
 
 function CheckoutPage() {
   const user = useSelector((state) => state.user);
   const [items, setItems] = useState();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleAddToCart = async (product) => {
-    // console.log(user)
     if (!user) {
       //todo - error msg?
       return false;
@@ -20,15 +20,21 @@ function CheckoutPage() {
       const response = await fetch("/api/cart/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: user, product: product, quantity: 1 }),
+        body: JSON.stringify({ user: user, product: product, quantity: product.quantity }),
       });
       //   console.log(response);
       const data = await response.json();
-      //   console.log(data.items)
+      console.log(data.items.length)
       setItems(data.items);
+      let total = 0;
+      data.items.map((item) => {
+        total += item.quantity;
+      })
+      dispatch(setItemCount({ itemCount: total}));
     } catch (e) {
       console.log(e);
     }
+    
   };
 
   const handleRemoveFromCart = async (product) => {
@@ -47,6 +53,11 @@ function CheckoutPage() {
       const data = await response.json();
       //   console.log(data.items)
       setItems(data.items);
+      let total = 0;
+      data.items.map((item) => {
+        total += item.quantity;
+      })
+      dispatch(setItemCount({ itemCount: total}));
     } catch (e) {
       console.log(e);
     }
@@ -70,7 +81,7 @@ function CheckoutPage() {
                 </div>
                 <div className="tw-flex tw-flex-col lg:tw-flex-row tw-px-6 tw-py-4 tw-bg-white">
                   <img
-                    className="tw-flex-none tw-w-60 tw-h-60 tw-object-cover"
+                    className="tw-flex-none tw-w-60 tw-h-60 tw-object-cover tw-ml-3"
                     src={product.product.image_url}
                     alt={product.product.product_name}
                   />
@@ -161,6 +172,8 @@ function CheckoutPage() {
   return (
     <>
       <Header />
+      {items && items.length>0 ?
+      <>
       <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
         <div className="tw-text-base lg:tw-text-2xl md:tw-text-xl tw-font-bold tw-pt-10">
           Shopping Cart ({getQuantity()} items)
@@ -179,29 +192,29 @@ function CheckoutPage() {
             </div>
           </section>
 
-          <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[5rem] tw-justify-center tw-h-[20rem] tw-text-3/4  ">
-            <div className="tw-pt-5 tw-pb-5 lg:tw-w-[25rem] tw-w-[20rem] md:tw-w-[23rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
+          <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[5rem] tw-justify-center tw-h-[20rem] tw-text-3/4 tw-mx-auto ">
+            <div className="tw-pt-5 tw-pb-5 lg:tw-w-[20rem] tw-w-[15rem] md:tw-w-[15rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
               <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <button className="tw-w-3/4 tw-bg-blue-500  tw-hover:bg-blue-700 text-white tw-font-bold py-2 px-6 my-3 tw-rounded-full content-center"
+                <button className="tw-mb-3 tw-w-3/4 tw-bg-blue-500  tw-hover:bg-blue-700 text-white tw-font-bold py-2 px-6 my-3 tw-rounded-full"
                   onClick={handleCheckout}
                 >
                   Continue to Checkout
                 </button>
               </div>
-              <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
+              {/* <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" /> */}
               <div className="tw-flex tw-flex-row px-6 py-2 my-1">
                 <div className="tw-basis-1/12"></div>
                 <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
                   Subtotal ({getQuantity()} items)
                 </div>
-                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4">
+                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
                   ${getPrice()}
                 </div>
               </div>
-              <div className="tw-flex tw-flex-row px-6 pb-2 pt-0">
+              <div className="tw-flex tw-flex-row tw-px-6 tw-pb-2">
                 <div className="tw-basis-1/12"></div>
-                <div className="tw-text-base mb-2 tw-basis-3/4">Shipping</div>
-                <div className="tw-font-bold tw-text-base mb-2 tw-basis-1/4 tw-text-green-600">
+                <div className="tw-text-base tw-mb-2 tw-basis-3/4">Shipping</div>
+                <div className="tw-font-bold tw-text-base tw-mb-2 tw-basis-1/4 tw-text-green-600">
                   Free
                 </div>
               </div>
@@ -209,10 +222,10 @@ function CheckoutPage() {
               <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
               <div className="tw-flex tw-flex-row px-6 py-2">
                 <div className="tw-basis-1/12"></div>
-                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
+                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4 tw-pt-3">
                   Estimated Total
                 </div>
-                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4">
+                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-pt-3 tw-mr-3">
                   ${getPrice()}
                 </div>
               </div>
@@ -220,6 +233,16 @@ function CheckoutPage() {
           </section>
         </div>
       </div>
+      </>
+      : 
+      <>
+        <div className="tw-flex tw-flex-col tw-h-[calc(100vh-14rem)] tw-items-center tw-justify-center tw--mt-5">
+          <CiShoppingCart className="tw-animate-pulse tw-w-[20rem] tw-h-[20rem]" />
+          <p className="tw-font-bold">Sorry Cart Empty!</p>
+        </div>
+        
+      </>
+      }
       <Footer />
     </>
   );
