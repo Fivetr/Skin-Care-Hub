@@ -93,17 +93,15 @@ const Categories = () => {
     return (
       <div className="tw-bg-red-300 tw-py-12 tw-px-4">
         <h2 className="tw-text-2xl tw-font-bold tw-text-center tw-mb-8">Explore Categories</h2>
-        <div className="tw-flex tw-flex-wrap-reverse tw-justify-center tw-gap-4">
+        <div className="tw-grid lg:tw-grid-cols-7 md:tw-grid-cols-7 sm:tw-grid-cols-2 tw-gap-4">
           {categories.map((category, index) => {
-            if (index % 14 === 0) {
+            
               return (
-                <div className="tw-w-full tw-flex tw-flex-wrap tw-justify-center tw-gap-4 tw-mb-4">
+                <div className="tw-flex tw-items-center tw-justify-center tw-mb-4">
                   <CategoryTile key={category.title} {...category} />
                 </div>
               );
-            } else {
-              return <CategoryTile key={category.title} {...category} />;
-            }
+           
           })}
         </div>
       </div>

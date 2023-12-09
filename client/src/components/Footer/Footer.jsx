@@ -16,7 +16,7 @@ function Footer() {
         </a>
       </div>
       <p className="tw-mt-1 tw-text-gray-600">
-        &copy; {2023} Clean Skin Care
+        &copy; {2023} Skin Care Hub
       </p>
     </div>
   );

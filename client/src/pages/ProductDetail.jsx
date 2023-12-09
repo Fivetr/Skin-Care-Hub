@@ -1,16 +1,18 @@
 import React ,{ useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Product from "../components/Product/Product";
-import { useSelector} from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { CiShoppingBasket } from "react-icons/ci";
+import { setItemCount } from "../redux/features/auth/cartSlice";
 
 function ProductDetail() {
   const [product, setProduct] = useState();
   const { id } = useParams();
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-
+  const count = useSelector((state) => state.cart.itemCount);
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -27,9 +29,6 @@ function ProductDetail() {
   }, []);
 
   const handleAddToCart = async () => {
-    console.log("Here")
-    console.log(id)
-    console.log(user)
     if(!user){
       //todo - error msg?
       return false;
@@ -41,6 +40,7 @@ function ProductDetail() {
         body: JSON.stringify({user: user, product: product, quantity: 1}),
       });
       console.log(response);
+      dispatch(setItemCount({ itemCount: count+1}));
     } catch (e) {
       console.log(e)
     }

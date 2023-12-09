@@ -12,13 +12,16 @@ import { useDispatch } from "react-redux";
 import { offsetUser } from "../../redux/features/auth/userSlice";
 import { useNavigate } from "react-router-dom";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
+import { useEffect } from 'react';
 import logo from "../../assets/logo.jpg";
+import { setItemCount } from "../../redux/features/auth/cartSlice";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.exist);
   const currentUser = useSelector((state) => state.user.user);
   const isAdmin = useSelector((state) => state.user.isAdmin);
+  const count = useSelector((state) => state.cart.itemCount);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -41,19 +44,39 @@ function Header({ pageBG }) {
       console.error("Error logging out:", e);
     }
   };
+  useEffect(() => {
+    const getCart = async () => {
+      if(!currentUser){
+          //todo - error msg?
+          return false;
+        }
+    try {
+          const response = await fetch(`/api/cart/mycart/${currentUser._id}`, {
+          method: "GET"
+      });
+      const data = await response.json();
+      let total = 0;
+      data.items.map((item) => {
+        total += item.quantity;
+      })
+      dispatch(setItemCount({ itemCount: total}));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+  getCart();
+  }, [])
   return (
     <>
       <div className="tw-h-14 tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
         <div className="tw-text-green-50 tw-flex tw-items-center tw-justify-center">
-          <Link to="/">
-            <div className="tw-flex tw-items-center">
+            <div className="tw-flex tw-items-center" onClick={() => navigate("/")}>
               <img
                 src={logo}
                 className="tw-w-[3.5rem] tw-h-[3.5rem] tw-bg-white"
               />
-              <h1 className="tw-ml-5 tw-text-xl tw-font-bold tw-text-gray-600 hover:tw-text-green-500 tw-no-underline">Skin Care Hub</h1>
+              <h1 className="tw-ml-5 tw-text-xl tw-font-bold tw-text-gray-600 hover:tw-cursor-pointer tw-no-underline">Skin Care Hub</h1>
             </div>
-          </Link>
           </div>
           {user && (
             <div className="tw-flex tw-justify-center">
@@ -67,6 +90,7 @@ function Header({ pageBG }) {
         <button
           className="sm:tw-hidden hover:tw-scale-110 tw-duration-700"
           onClick={() => setOpen(!Open)}
+          title="Menu"
         >
           {Open ? (
             <AiFillCloseSquare className="tw-w-[1.5rem] tw-h-[1.5rem]" />
@@ -76,16 +100,17 @@ function Header({ pageBG }) {
         </button>
         <nav className="tw-hidden sm:tw-block tw-items-center">
           <ul className="tw-flex tw-items-center tw-gap-6 tw-justify-between tw-h-full">
-            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Search">
               <Link to="/search" className="tw-text-black ">
                 <HiMiniSquares2X2 className="tw-w-[1.5rem] tw-h-[1.5rem]" />
               </Link>
             </li>
             {
-              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700"
+              title="Cart">
                 <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-relative">
                   <FaCartShopping className="tw-w-[1.5rem] tw-h-[1.5rem]" />
-                  <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>1</span>
+                  <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>{count}</span>
                 </Link>
                 </li>
             }
@@ -97,14 +122,14 @@ function Header({ pageBG }) {
                 </li>
             }
             {
-              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Home">
                   <Link to="/" className="tw-text-black">
                     <FaRegNewspaper className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                   </Link> 
                 </li>
             }
             
-            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+            <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Login/Logout">
               {user ? (
                 <button onClick={handleLogout}>
                   <FiLogOut className="tw-w-[1.5rem] tw-h-[1.5rem]" />
@@ -132,21 +157,27 @@ function Header({ pageBG }) {
           <nav className="tw-mx-auto tw-w-[18rem] tw-rounded-lg tw-border-gray-200">
             <ul className="tw-mb-0">
               <Link to="/auth" className="tw-text-black tw-no-underline" onClick={user && {handleLogout}}>
-                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg">
-                  Login/Logout
+                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg"
+                title="Login/Logout"
+                >
                   <FiLogIn />
                 </li>
               </Link>
               <Link to="/search" className="tw-text-black tw-no-underline">
-                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200">
+                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
+                title="Products"
+                >
                   Products
                   <HiMiniSquares2X2 />
                 </li>
               </Link>
-              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200">
+              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
+              title="Cart">
                 Cart <FaCartShopping />
               </li>}
-              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg ">
+              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg"
+              title="Orders"
+              >
                 Orders <FaRegNewspaper />
               </li>}
             </ul>
