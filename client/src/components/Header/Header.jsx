@@ -46,8 +46,7 @@ function Header({ pageBG }) {
   };
   useEffect(() => {
     const getCart = async () => {
-      if(!currentUser){
-          //todo - error msg?
+      if(!user){
           return false;
         }
     try {
