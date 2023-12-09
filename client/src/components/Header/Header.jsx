@@ -21,6 +21,7 @@ function Header({ pageBG }) {
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isMobile = window.innerWidth <= 768;
   const handleLogout = async () => {
     try {
       const response = await fetch("/api/auth/logout", {
@@ -53,9 +54,9 @@ function Header({ pageBG }) {
               <h1 className="tw-ml-5 tw-text-xl tw-font-bold tw-text-gray-600 hover:tw-cursor-pointer tw-no-underline">Skin Care Hub</h1>
             </div>
           </div>
-          {user && (
+          {user && !isMobile && (
             <div className="tw-flex tw-justify-center">
-              <span className="tw-text-center tw-text-xl tw-font-semibold tw-italic tw-text-gray-600 hover:tw-text-green-500">
+              <span className="tw-text-center tw-text-xl tw-font-semibold tw-italic tw-text-gray-600">
                 Hi, {currentUser.username} !
               </span>
             </div>
