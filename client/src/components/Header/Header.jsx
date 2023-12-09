@@ -46,18 +46,24 @@ function Header({ pageBG }) {
       <div className="tw-h-14 tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
         <div className="tw-text-green-50 tw-flex tw-items-center tw-justify-center">
           <Link to="/">
-            <img
-              src={logo}
-              className="tw-w-[3.5rem] tw-h-[3.5rem] tw-bg-white tw-relative tw--left-5"
-            />
+            <div className="tw-flex tw-items-center">
+              <img
+                src={logo}
+                className="tw-w-[3.5rem] tw-h-[3.5rem] tw-bg-white"
+              />
+              <h1 className="tw-ml-5 tw-text-xl tw-font-bold tw-text-gray-600 hover:tw-text-green-500 tw-no-underline">Skin Care Hub</h1>
+            </div>
           </Link>
-          {
-            user && <span className="tw-font-semibold tw-text-center tw-text-xl tw-text-gray-500">
-                      Hi, {currentUser.username}
-                    </span>
-          }
-          
-        </div>
+          </div>
+          {user && (
+            <div className="tw-flex tw-justify-center">
+              <span className="tw-text-center tw-text-xl tw-font-semibold tw-italic tw-text-gray-600 hover:tw-text-green-500">
+                Hi, {currentUser.username} !
+              </span>
+            </div>
+          )}
+        
+      {/* </div> */}
         <button
           className="sm:tw-hidden hover:tw-scale-110 tw-duration-700"
           onClick={() => setOpen(!Open)}
