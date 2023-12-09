@@ -46,12 +46,12 @@ function NewProductPage() {
   const handleAddIngredient = (event) => {
     event.preventDefault();
     if (ingredient.trim() !== "") {
-      if (ingredientsList.length < 10) {
+      if (ingredientsList.length < 50) {
         setIngredientsList([...ingredientsList, ingredient]);
         setIngredient("");
         setErrorMessage("");
       } else {
-        setErrorMessage("Maximum 10 ingredients can be added");
+        setErrorMessage("Maximum 50 ingredients can be added");
       }
     }
   };

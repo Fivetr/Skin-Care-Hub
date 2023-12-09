@@ -53,7 +53,7 @@ function register({ setAuthMenu }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="tw-space-y-5 tw-pt-[15%] tw-w-[25rem] tw-mx-auto"
+      className="tw-space-y-5 tw-pl-[2rem] tw-pr-[2rem] tw-pt-[15%] lg:tw-w-[25rem] tw-mx-auto"
     >
       <div className="tw-flex tw-justify-between">
         <h1 className="tw-text-2xl tw-font-medium">Register</h1>
@@ -67,7 +67,7 @@ function register({ setAuthMenu }) {
 
       <label
         htmlFor="email"
-        className="tw-mb-2 block tw-text-sm tw-font-medium"
+        className="tw-mb-2 tw-text-sm tw-font-medium"
       >
         User Name
       </label>
@@ -81,7 +81,7 @@ function register({ setAuthMenu }) {
       />
       <label
         htmlFor="email"
-        className="tw-mb-2 tw-block tw-text-sm tw-font-medium"
+        className="tw-mb-2 tw-text-sm tw-font-medium"
       >
         Email
       </label>
@@ -96,7 +96,7 @@ function register({ setAuthMenu }) {
 
       <label
         htmlFor="email"
-        className="tw-mb-2 tw-block tw-text-sm tw-font-medium"
+        className="tw-mb-2 tw-text-sm tw-font-medium"
       >
         Password
       </label>
@@ -119,7 +119,7 @@ function register({ setAuthMenu }) {
       <div className="tw-flex tw-justify-center tw-items-center">
         <button
           type="submit"
-          className="tw-inline-block tw-cursor-pointer tw-rounded-md tw-border-2 tw-border-cyan-200 tw-bg-cyan-100 tw-px-3 tw-py-1 tw-no-underline tw-shadow-md tw-shadow-cyan-300 tw-duration-500 hover:tw-bg-cyan-300 tw-w-[32%] tw-h-10 tw-text-center tw-font-medium hover:tw-scale-105"
+          className="tw-mt-4 tw-inline-block tw-cursor-pointer tw-rounded-md tw-border-2 tw-border-cyan-200 tw-bg-cyan-100 tw-px-3 tw-py-1 tw-no-underline tw-shadow-md tw-shadow-cyan-300 tw-duration-500 hover:tw-bg-cyan-300 tw-w-[32%] tw-h-10 tw-text-center tw-font-medium hover:tw-scale-105"
         >
           {/* render loading anamiation if is loading */}
           {loading ? (
