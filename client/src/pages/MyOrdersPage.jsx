@@ -76,7 +76,7 @@ function MyOrdersPage() {
   return (
     <>
       <Header />
-        
+        <main className="tw-h-[calc(92vh-3.5rem)]">
         {transactions ?
         <>
             <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
@@ -95,7 +95,7 @@ function MyOrdersPage() {
             </div>
         </>
       : null}
-        
+        </main>    
       <Footer />
     </>
   );
