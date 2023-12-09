@@ -172,12 +172,16 @@ function Header({ pageBG }) {
               </Link>
               {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
               title="Cart">
-                Cart <FaCartShopping />
+                <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-no-underline">
+                  Cart <FaCartShopping />
+                </Link>
               </li>}
               {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg"
               title="Orders"
               >
-                Orders <FaRegNewspaper />
+                <Link to={`/myorders/${currentUser._id}`} className="tw-text-black tw-no-underline">
+                  Orders <FaRegNewspaper />
+                </Link>
               </li>}
             </ul>
           </nav>
