@@ -28,7 +28,7 @@ function ProductDetail() {
 
   }, []);
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (userQuantity) => {
     if(!user){
       //todo - error msg?
       return false;
@@ -37,7 +37,7 @@ function ProductDetail() {
       const response = await fetch("/api/cart/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({user: user, product: product, quantity: 1}),
+        body: JSON.stringify({user: user, product: product, quantity: userQuantity}),
       });
       console.log(response);
       dispatch(setItemCount({ itemCount: count+1}));

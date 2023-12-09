@@ -13,3 +13,11 @@
     @apply tw-inline-block tw-cursor-pointer tw-rounded-md tw-border-2 tw-border-cyan-200 tw-bg-cyan-100 tw-px-3 tw-py-1 tw-font-semibold tw-no-underline tw-shadow-md tw-shadow-cyan-300 tw-duration-500 hover:tw-scale-110 hover:tw-bg-cyan-300;
   }
 }
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
