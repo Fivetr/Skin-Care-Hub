@@ -160,6 +160,7 @@ function Header({ pageBG }) {
                 <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg"
                 title="Login/Logout"
                 >
+                  Login/Logout
                   <FiLogIn />
                 </li>
               </Link>
