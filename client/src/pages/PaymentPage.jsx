@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import CartDetails from "../components/Checkout/Cart";
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 
 function PaymentPage() {
   const user = useSelector((state) => state.user);
   const [items, setItems] = useState();
+  const navigate = useNavigate();
 
   const initialOptions = {
-    clientId: "",
+    clientId: "Aeku9GKbX-rcwq4iczmH8JLGJOtGfZ0NxGhll6_-C2b4tjop8QIWsTFvf-QywNbld0x0GL6bAtAKnVhO",
     currency: "USD",
     disableFunding: 'credit,card'
   };
@@ -116,7 +119,7 @@ function PaymentPage() {
   }
 
   const onApprove = async (data) => {
-    console.log(data.orderID)
+    // console.log(data.orderID)
     if (!user) {
       //todo - error msg?
       return false;
@@ -127,9 +130,14 @@ function PaymentPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: user, orderID: data.orderID }),
       });
-      //   console.log(response);
-      // const data = await response.json();
-      // console.log(data)
+        // console.log(response);
+        if(response.ok){
+          toast.success("Order Placed Successfully!");
+          navigate("/search");
+        }
+      // const resp = await response.json();
+      // // if(resp.status)
+      // console.log(resp)
     } catch (e) {
       console.log(e);
     }
