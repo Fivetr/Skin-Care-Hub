@@ -1,7 +1,7 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { FaCartShopping, FaRegNewspaper } from "react-icons/fa6";
+import { FaCartShopping, FaRegNewspaper, FaClockRotateLeft } from "react-icons/fa6";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { useState } from "react";
 import { Transition } from "@headlessui/react";
@@ -87,6 +87,13 @@ function Header({ pageBG }) {
                   <FaCartShopping className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                   <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>1</span>
                 </Link>
+                </li>
+            }
+            {
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+                  <Link to={`/myorders/${currentUser._id}`} className="tw-text-black">
+                    <FaClockRotateLeft className="tw-w-[1.5rem] tw-h-[1.5rem]" />
+                  </Link> 
                 </li>
             }
             {
