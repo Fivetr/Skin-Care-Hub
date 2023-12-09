@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CartDetails(items) {
 
     const user = useSelector(state => state.user);
-
     const removeItem = () => {
         
     }

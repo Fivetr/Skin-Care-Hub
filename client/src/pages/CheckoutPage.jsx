@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import CartDetails from "../components/Checkout/Cart";
+import { setItemCount } from "../redux/features/auth/cartSlice";
 
 function CheckoutPage() {
   const user = useSelector((state) => state.user);
   const [items, setItems] = useState();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleAddToCart = async (product) => {
-    // console.log(user)
     if (!user) {
       //todo - error msg?
       return false;
@@ -20,15 +19,21 @@ function CheckoutPage() {
       const response = await fetch("/api/cart/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: user, product: product, quantity: 1 }),
+        body: JSON.stringify({ user: user, product: product, quantity: product.quantity }),
       });
       //   console.log(response);
       const data = await response.json();
-      //   console.log(data.items)
+      console.log(data.items.length)
       setItems(data.items);
+      let total = 0;
+      data.items.map((item) => {
+        total += item.quantity;
+      })
+      dispatch(setItemCount({ itemCount: total}));
     } catch (e) {
       console.log(e);
     }
+    
   };
 
   const handleRemoveFromCart = async (product) => {
@@ -47,6 +52,11 @@ function CheckoutPage() {
       const data = await response.json();
       //   console.log(data.items)
       setItems(data.items);
+      let total = 0;
+      data.items.map((item) => {
+        total += item.quantity;
+      })
+      dispatch(setItemCount({ itemCount: total}));
     } catch (e) {
       console.log(e);
     }

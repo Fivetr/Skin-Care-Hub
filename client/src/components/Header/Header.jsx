@@ -12,13 +12,16 @@ import { useDispatch } from "react-redux";
 import { offsetUser } from "../../redux/features/auth/userSlice";
 import { useNavigate } from "react-router-dom";
 import { HiMiniSquares2X2 } from "react-icons/hi2";
+import { useEffect } from 'react';
 import logo from "../../assets/logo.jpg";
+import { setItemCount } from "../../redux/features/auth/cartSlice";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
   const user = useSelector((state) => state.user.exist);
   const currentUser = useSelector((state) => state.user.user);
   const isAdmin = useSelector((state) => state.user.isAdmin);
+  const count = useSelector((state) => state.cart.itemCount);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -41,6 +44,28 @@ function Header({ pageBG }) {
       console.error("Error logging out:", e);
     }
   };
+  useEffect(() => {
+    const getCart = async () => {
+      if(!currentUser){
+          //todo - error msg?
+          return false;
+        }
+    try {
+          const response = await fetch(`/api/cart/mycart/${currentUser._id}`, {
+          method: "GET"
+      });
+      const data = await response.json();
+      let total = 0;
+      data.items.map((item) => {
+        total += item.quantity;
+      })
+      dispatch(setItemCount({ itemCount: total}));
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+  getCart();
+  }, [])
   return (
     <>
       <div className="tw-h-14 tw-py-2 tw-px-5 tw-flex tw-justify-between tw-border-b tw-bg-[#eae6aded]">
@@ -85,7 +110,7 @@ function Header({ pageBG }) {
               title="Cart">
                 <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-relative">
                   <FaCartShopping className="tw-w-[1.5rem] tw-h-[1.5rem]" />
-                  <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>1</span>
+                  <span className="tw-absolute tw-top-0 tw-right-0 tw-bg-red-500 tw-rounded-full tw-text-white tw-w-2.5 tw-h-2.5 tw-flex tw-items-center tw-justify-center" style={{fontSize: "6px"}}>{count}</span>
                 </Link>
                 </li>
             }
