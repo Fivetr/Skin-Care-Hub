@@ -10,13 +10,13 @@ function HomePage() {
     <>
       <Header />
       <section className="tw-flex tw-justify-center tw-text-xl">
-        <Carousel className="w-100" />
+        <Carousel />
+      </section>
+      <section className="tw-justify-center tw-text-xl">
+        <Categories />
       </section>
       <section className="tw-flex tw-justify-center tw-text-xl">
-        <Categories className="w-100" />
-      </section>
-      <section className="tw-flex tw-justify-center tw-text-xl">
-        <Blogs className="w-100" />
+        <Blogs />
       </section>
       <HomeFooter />
     </>
