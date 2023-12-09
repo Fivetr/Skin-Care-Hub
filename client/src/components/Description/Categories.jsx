@@ -95,7 +95,6 @@ const Categories = () => {
         <h2 className="tw-text-2xl tw-font-bold tw-text-center tw-mb-8">Explore Categories</h2>
         <div className="tw-grid lg:tw-grid-cols-7 md:tw-grid-cols-7 sm:tw-grid-cols-2 tw-gap-4">
           {categories.map((category, index) => {
-            
               return (
                 <div className="tw-flex tw-items-center tw-justify-center tw-mb-4">
                   <CategoryTile key={category.title} {...category} />

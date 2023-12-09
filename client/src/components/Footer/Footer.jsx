@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className="tw-bg-[#eae6aded] tw-py-4 tw-text-center">
+    <div className="tw-sticky tw-bottom-0 tw-w-full tw-bg-[#eae6aded] tw-py-2 tw-text-center md:hidden">
       <div className="tw-flex tw-justify-center tw-gap-4">
         <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
           <FaFacebook className="tw-w-6 tw-h-6 tw-text-gray-600 hover:tw-text-blue-500" />
