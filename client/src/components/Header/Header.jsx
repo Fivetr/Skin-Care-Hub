@@ -18,13 +18,13 @@ import { setItemCount } from "../../redux/features/auth/cartSlice";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const user = useSelector((state) => state.user.exist);
   const currentUser = useSelector((state) => state.user.user);
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const count = useSelector((state) => state.cart.itemCount);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isMobile = window.innerWidth <= 768;
   const handleLogout = async () => {
     try {
       const response = await fetch("/api/auth/logout", {
@@ -45,6 +45,16 @@ function Header({ pageBG }) {
       console.error("Error logging out:", e);
     }
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const getCart = async () => {
       if(!user){
