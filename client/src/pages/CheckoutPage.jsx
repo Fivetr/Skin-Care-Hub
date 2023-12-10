@@ -79,7 +79,7 @@ function CheckoutPage() {
                     ${product.product.price.toFixed(2)}
                   </span>
                 </div>
-                <div className="tw-flex tw-flex-col lg:tw-flex-row tw-px-6 tw-py-4 tw-bg-white">
+                <div className="tw-flex tw-flex-col lg:tw-flex-row tw-px-6 tw-py-12 tw-bg-white">
                   <img
                     className="tw-flex-none tw-w-60 tw-h-60 tw-object-cover tw-ml-3"
                     src={product.product.image_url}
@@ -194,7 +194,7 @@ function CheckoutPage() {
             </section>
 
             <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[1rem] tw-justify-center tw-h-[20rem] tw-text-3/4 tw-mx-auto tw-mx-4">
-              <div className="tw-pt-5 tw-pb-5 lg:tw-w-[20rem] tw-w-[15rem] md:tw-w-[15rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
+              <div className="tw-pt-5 tw-pb-5 lg:tw-w-[20rem] tw-w-[20rem] md:tw-w-[15rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
                 <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
                   <button className="tw-mb-4 tw-w-3/4 tw-bg-blue-500 tw-hover:bg-blue-700 tw-text-white tw-font-bold tw-py-3 tw-px-6 tw-my-2 tw-rounded-full"
                     onClick={handleCheckout}
