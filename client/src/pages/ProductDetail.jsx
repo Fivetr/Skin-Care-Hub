@@ -55,7 +55,7 @@ function ProductDetail() {
               id = {id}
               name = {product.product_name}
               type = {product.product_type}
-              price = {product.price}
+              price = {product.price.toFixed(2)}
               img = {product.image_url}
               ingredients = {product.clean_ingreds}
               quantity = {product.quantity}
