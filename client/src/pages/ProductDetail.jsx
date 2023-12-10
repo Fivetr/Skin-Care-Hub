@@ -6,6 +6,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { CiShoppingBasket } from "react-icons/ci";
 import { setItemCount } from "../redux/features/auth/cartSlice";
+import { toast } from "react-toastify";
 
 function ProductDetail() {
   const [product, setProduct] = useState();
@@ -40,6 +41,7 @@ function ProductDetail() {
         body: JSON.stringify({user: user, product: product, quantity: userQuantity}),
       });
       console.log(response);
+      toast.success("Product added to cart successfully!");
       dispatch(setItemCount({ itemCount: count+1}));
     } catch (e) {
       console.log(e)
