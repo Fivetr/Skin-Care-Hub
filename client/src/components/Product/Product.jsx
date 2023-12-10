@@ -98,7 +98,7 @@ function Product({
           <div className="tw-flex tw-justify-between tw-items-evenly tw-mt-4 tw-mr-12">
 
             {
-              (!isAdmin) &&
+              (quantity > 0 && !isAdmin) &&
               <div class="tw-flex tw-items-center tw-border tw-border-gray-300 tw-rounded-md">
                 <button onClick={decrementQuantity} class="tw-w-7 tw-h-7 tw-flex tw-items-center tw-justify-center tw-bg-gray-200 tw-rounded-md tw-hover:bg-gray-300" data-action="decrement">
                   <span class="tw-text-sm tw-font-bold">-</span>
@@ -106,6 +106,20 @@ function Product({
                 <input class="tw-w-12 tw-text-center tw-border-none tw-focus:outline-none tw-focus:ring-1 tw-focus:ring-blue-500 tw-appearance-none" type="number" min="1" value={userQuantity} />
                 <button onClick={incrementQuantity} class="tw-w-7 tw-h-7 tw-flex tw-items-center tw-justify-center tw-bg-gray-200 tw-rounded-md tw-hover:bg-gray-300" data-action="increment">
                   <span class="tw-text-sm tw-font-bold">+</span>
+                </button>
+              </div>
+
+            }
+
+            {
+              (quantity < 1) &&
+              <div class="tw-flex tw-items-center tw-border tw-border-gray-300 tw-rounded-md">
+                <button class="tw-w-7 tw-h-7 tw-flex tw-items-center tw-justify-center tw-bg-gray-100 tw-rounded-md tw-hover:bg-gray-200" data-action="decrement">
+                  <span class="tw-text-sm tw-font-bold tw-text-gray-400">-</span>
+                </button>
+                <input class="tw-w-12 tw-text-center tw-border-none tw-focus:outline-none tw-text-gray-400 tw-appearance-none" type="number" min="1" value="0" />
+                <button class="tw-w-7 tw-h-7 tw-flex tw-items-center tw-justify-center tw-bg-gray-100 tw-rounded-md tw-hover:bg-gray-200" data-action="increment">
+                  <span class="tw-text-sm tw-font-bold tw-text-gray-400">+</span>
                 </button>
               </div>
 
@@ -133,7 +147,7 @@ function Product({
               </button>
             }
             {
-              (!user && !isAdmin) &&
+              ((!user && !isAdmin) || (user && quantity < 1)) &&
               <button className="tw-flex tw-items-center tw-justify-center tw-text-white tw-end-2.5 tw-bottom-2.5 tw-bg-blue-400 tw-font-medium tw-rounded-lg tw-text-sm tw-px-4 tw-py-2" type="button"
               >
                 Add to cart
