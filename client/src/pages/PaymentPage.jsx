@@ -30,7 +30,7 @@ function PaymentPage() {
               <div className="tw-overflow-hidden tw-rounded-md tw-shadow-lg tw-w-25 tw-relative">
                 <div className="tw-flex-initial tw-absolute tw-top-2 tw--left-1 ">
                   <span className="tw-inline-block tw-rounded-full tw-px-4 tw-py-2 tw-text-sm md:tw-text-base tw-font-semibold tw-mr-2">
-                    ${product.product.price}
+                    ${product.product.price.toFixed(2)}
                   </span>
                 </div>
                 <div className="tw-flex tw-flex-col lg:tw-flex-row tw-px-6 tw-py-4 tw-bg-white">
@@ -66,7 +66,7 @@ function PaymentPage() {
           price = price + item.quantity * item.product.price;
         })
       : null;
-    return price;
+    return price.toFixed(2);
   };
 
   const getQuantity = () => {
