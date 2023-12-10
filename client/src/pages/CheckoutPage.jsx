@@ -13,7 +13,6 @@ function CheckoutPage() {
   const dispatch = useDispatch();
   const handleAddToCart = async (product) => {
     if (!user) {
-      //todo - error msg?
       return false;
     }
     try {
@@ -22,9 +21,7 @@ function CheckoutPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: user, product: product, quantity: product.quantity }),
       });
-      //   console.log(response);
       const data = await response.json();
-      console.log(data.items.length)
       setItems(data.items);
       let total = 0;
       data.items.map((item) => {
@@ -38,9 +35,7 @@ function CheckoutPage() {
   };
 
   const handleRemoveFromCart = async (product) => {
-    // console.log(user)
     if (!user) {
-      //todo - error msg?
       return false;
     }
     try {
@@ -49,9 +44,7 @@ function CheckoutPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: user, product: product, quantity: 1 }),
       });
-      //   console.log(response);
       const data = await response.json();
-      //   console.log(data.items)
       setItems(data.items);
       let total = 0;
       data.items.map((item) => {
@@ -64,11 +57,9 @@ function CheckoutPage() {
   };
 
   const renderItems = () =>
-    // console.log(items)
     items != "undefined" && items.cart != "undefined"
       ? items.map((product, index) => {
           return (
-            // console.log(product.product._id)
             <div
               key={`${product.product._id}`}
               className="tw-pt-5 tw-pb-5 lg:tw-w-[37rem] tw-w-[17rem] md:tw-w-[30rem]"
@@ -124,10 +115,8 @@ function CheckoutPage() {
 
   const getPrice = () => {
     let price = 0;
-    console.log(items)
     items
       ? items.map((item, index) => {
-          // console.log(item.product.price);
           price = price + item.quantity * item.product.price;
         })
       : null;
@@ -150,9 +139,7 @@ function CheckoutPage() {
 
   useEffect(() => {
     const getCart = async () => {
-      // console.log(user)
       if (!user) {
-        //todo - error msg?
         return false;
       }
       try {
@@ -161,7 +148,6 @@ function CheckoutPage() {
         });
         const data = await response.json();
         setItems(data.items);
-        // console.log(data.items)
       } catch (e) {
         console.log(e.message);
       }

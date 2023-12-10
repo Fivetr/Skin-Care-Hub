@@ -9,7 +9,6 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     setItemCount: (state, action) => {
-      // console.log(action.payload)
       state.itemCount = action.payload.itemCount;
     },
   },

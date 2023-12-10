@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get("/mycart/:id", async (req, res) => {
     const user = req.params.id;
-    // console.log(req.session.user);
     const cart = await Cart.findOne({ userId: user });
     if(cart){
         return res.status(200).json(cart);
@@ -15,14 +14,12 @@ router.get("/mycart/:id", async (req, res) => {
 });
 
 router.post("/add", async(req, res) => {
-    // console.log(req.body.user.user._id)
     const user = req.body.user.user._id;
     const item = {
         product: req.body.product,
         quantity: req.body.quantity
     }
     let found = false;
-    // console.log(item)
     const cart = await Cart.findOne({ userId: user })
     .then((cart) => {
         if(cart){
@@ -32,7 +29,6 @@ router.post("/add", async(req, res) => {
                     found = true;
                 }
             })
-            // console.log(found);
             if(found == true){
                 cart.items.map((item) => {
                     if(item.product._id == req.body.product._id){
@@ -53,15 +49,10 @@ router.post("/add", async(req, res) => {
         }
         
     });
-    // console.log(cart)
-    // return res.status(200).json(cart);
-    
 });
 
 router.post("/delete", async(req, res) => {
-    // console.log(req.body.user.user._id)
     const user = req.body.user.user._id;
-    // console.log(user)
     await Cart.findOne({ userId: user })
     .then((cart) => {
         if(cart){
@@ -85,9 +76,6 @@ router.post("/delete", async(req, res) => {
         }
         
     });
-    // console.log(cart)
-    // return res.status(200).json(cart);
-    
 });
 
 export default router;

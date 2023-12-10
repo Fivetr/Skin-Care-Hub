@@ -10,9 +10,7 @@ function CartDetails(items) {
     }
 
     const handleAddToCart = async (product) => {
-        console.log(user)
         if(!user){
-          //todo - error msg?
           return false;
         }
         try {
@@ -21,7 +19,6 @@ function CartDetails(items) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({user: user, product: product, quantity: 1}),
           });
-          console.log(response);
         } catch (e) {
           console.log(e)
         }
@@ -29,9 +26,7 @@ function CartDetails(items) {
 
       useEffect(() => {
         const getCart = async () => {
-            console.log(user)
             if(!user){
-                //todo - error msg?
                 return false;
               }
           try {
@@ -40,7 +35,6 @@ function CartDetails(items) {
             });
             const data = await response.json();
             setItems(data.items);
-            console.log(data.items)
           } catch (e) {
             console.log(e.message);
           }
@@ -49,11 +43,8 @@ function CartDetails(items) {
       }, []);
 
     const renderItems = () => (
-
-            // console.log(items)
             items != 'undefined' && items.cart != 'undefined' ? 
             items.cart.map((product, index) => (
-                // console.log(product.product._id)
                 <div  key={`${product.product._id}${index}`} className='tw-pt-5 tw-pb-5'>
                     <div className="tw-overflow-hidden tw-rounded-md tw-shadow-lg">
                         

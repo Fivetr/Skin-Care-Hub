@@ -31,10 +31,8 @@ function Header({ pageBG }) {
         method: "GET",
         credentials: "same-origin",
       });
-      console.log(response);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         dispatch(offsetUser());
         navigate("/");
         toast.success("LOGGED OUT");

@@ -25,8 +25,6 @@ function ProductDetail() {
       }
     };
     fetchProductData();
-    console.log(product);
-
   }, []);
 
   const handleAddToCart = async (userQuantity) => {
@@ -40,7 +38,6 @@ function ProductDetail() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({user: user, product: product, quantity: userQuantity}),
       });
-      console.log(response);
       toast.success("Product added to cart successfully!");
       dispatch(setItemCount({ itemCount: count+1}));
     } catch (e) {

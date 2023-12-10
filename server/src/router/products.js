@@ -9,17 +9,10 @@ import {
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  console.log(req.query);
-
   const userInput = req.query.userInput || "";
   const minPrice = parseFloat(req.query.minPrice) || 0;
   const maxPrice = parseFloat(req.query.maxPrice) || Infinity;
   const type = req.query.type || "";
-
-  console.log(userInput);
-  console.log(minPrice);
-  console.log(maxPrice);
-  console.log(type);
 
   let products = await GetAllProducts();
   function shuffleArray(array) {

@@ -24,7 +24,6 @@ function Product({
         headers: { "Content-Type": "application/json" }
       });
       toast.success("Deleted product successfully.");
-      console.log(response);
       navigate("/search");
     } catch (e) {
       console.log(e);
