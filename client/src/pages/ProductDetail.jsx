@@ -38,7 +38,7 @@ function ProductDetail() {
         body: JSON.stringify({user: user, product: product, quantity: userQuantity}),
       });
       toast.success("Product added to cart successfully!");
-      dispatch(setItemCount({ itemCount: count+1}));
+      dispatch(setItemCount({ itemCount: count+userQuantity}));
     } catch (e) {
       console.log(e)
     }
