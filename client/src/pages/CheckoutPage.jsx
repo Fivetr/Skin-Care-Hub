@@ -172,7 +172,7 @@ function CheckoutPage() {
   return (
     <>
       <Header />
-      <main className="tw-h-[calc(100vh-3.5rem)] tw-h-screen tw-flex tw-flex-col">
+      <main className="tw-h-[calc(100vh-3.5rem)] tw-flex tw-flex-col tw-min-h-screen">
       {items && items.length>0 ?
       <>
         <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
@@ -244,6 +244,7 @@ function CheckoutPage() {
         
       </>
       }
+        <div className="tw-flex-grow"></div>
         <Footer />
       </main>
       
