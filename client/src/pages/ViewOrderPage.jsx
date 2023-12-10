@@ -93,7 +93,7 @@ function ViewOrderPage() {
         </div>
 
         <div className="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center lg:tw-gap-3">
-          <section className="tw-flex lg:tw-pr-2 tw-items-center tw-justify-center tw-text-3/4  ">
+          <section className="tw-flex lg:tw-pr-2 tw-items-center tw-justify-center tw-text-3/4 tw-pb-20 ">
             <div className="lg:tw-w-[25rem] tw-w-[20rem] md:tw-w-[23rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
               <div className="tw-flex tw-flex-row px-6 py-2 my-1">
                 <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/2">
