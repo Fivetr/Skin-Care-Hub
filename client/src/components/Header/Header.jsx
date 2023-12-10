@@ -18,13 +18,13 @@ import { setItemCount } from "../../redux/features/auth/cartSlice";
 
 function Header({ pageBG }) {
   const [Open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const user = useSelector((state) => state.user.exist);
   const currentUser = useSelector((state) => state.user.user);
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const count = useSelector((state) => state.cart.itemCount);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isMobile = window.innerWidth <= 768;
   const handleLogout = async () => {
     try {
       const response = await fetch("/api/auth/logout", {
@@ -45,6 +45,16 @@ function Header({ pageBG }) {
       console.error("Error logging out:", e);
     }
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const getCart = async () => {
       if(!user){
@@ -172,19 +182,23 @@ function Header({ pageBG }) {
                   <HiMiniSquares2X2 />
                 </li>
               </Link>
-              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
-              title="Cart">
+              {(user && !isAdmin) && 
                 <Link to={`/mycart/${currentUser._id}`} className="tw-text-black tw-no-underline">
+                  <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gay-200"
+                  title="Cart">
                   Cart <FaCartShopping />
+                  </li>
                 </Link>
-              </li>}
-              {(user && !isAdmin) && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg"
+              }
+              {(user && !isAdmin) && 
+                <Link to={`/myorders/${currentUser._id}`} className="tw-text-black tw-no-underline">
+                  <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-rounded-b-lg"
               title="Orders"
               >
-                <Link to={`/myorders/${currentUser._id}`} className="tw-text-black tw-no-underline">
-                  Orders <FaRegNewspaper />
-                </Link>
-              </li>}
+                Orders <FaClockRotateLeft />
+                </li>
+              </Link>
+              }
             </ul>
           </nav>
         </Transition>
