@@ -34,7 +34,7 @@ function PaymentPage() {
                     ${product.product.price.toFixed(2)}
                   </span>
                 </div>
-                <div className="tw-flex tw-flex-col lg:tw-flex-row tw-px-6 tw-py-4 tw-bg-white">
+                <div className="tw-flex tw-flex-col lg:tw-flex-row tw-px-6 tw-py-12 tw-bg-white">
                   <img
                     className="tw-flex-none tw-w-60 tw-h-60 tw-object-cover  tw-ml-3"
                     src={product.product.image_url}
@@ -225,7 +225,7 @@ function PaymentPage() {
                       ${getPrice()}
                     </div>
                   </div>
-                </div>
+                {/* </div> */}
                 <div className="tw-flex tw-flex-row px-6 pb-2 pt-0">
                   <div className="tw-basis-1/12"></div>
                   <div className="tw-text-base mb-2 tw-basis-3/4">Shipping</div>
@@ -243,6 +243,7 @@ function PaymentPage() {
                     ${getPrice()}
                   </div>
                 </div>
+              </div>
               </section>
             </div>
           </div>
