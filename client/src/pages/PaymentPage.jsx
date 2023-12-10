@@ -19,11 +19,9 @@ function PaymentPage() {
   };
 
   const renderItems = () =>
-    // console.log(items)
     items != "undefined" && items.cart != "undefined"
       ? items.map((product, index) => {
           return (
-            // console.log(product.product._id)
             <div
               key={`${product.product._id}`}
               className="tw-pt-5 tw-pb-5 lg:tw-w-[37rem] tw-w-[17rem] md:tw-w-[30rem]"
@@ -60,10 +58,8 @@ function PaymentPage() {
 
   const getPrice = () => {
     let price = 0;
-    // console.log(items)
     items
       ? items.map((item, index) => {
-          // console.log(item.product.price);
           price = price + item.quantity * item.product.price;
         })
       : null;
@@ -81,8 +77,6 @@ function PaymentPage() {
   };
 
   const generateUnits = () =>
-    // console.log("Inseide")
-    // console.log(items)
     [
       {
         description: "Skin-Care Products",
@@ -117,9 +111,7 @@ function PaymentPage() {
   };
 
   const onApprove = async (data) => {
-    // console.log(data.orderID)
     if (!user) {
-      //todo - error msg?
       return false;
     }
     try {
@@ -128,14 +120,10 @@ function PaymentPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: user, orderID: data.orderID }),
       });
-      // console.log(response);
       if (response.ok) {
         toast.success("Order Placed Successfully!");
         navigate(`/myorders/${user.user._id}`);
       }
-      // const resp = await response.json();
-      // // if(resp.status)
-      // console.log(resp)
     } catch (e) {
       console.log(e);
     }
@@ -143,9 +131,7 @@ function PaymentPage() {
 
   useEffect(() => {
     const getCart = async () => {
-      // console.log(user)
       if (!user) {
-        //todo - error msg?
         return false;
       }
       try {
@@ -154,31 +140,12 @@ function PaymentPage() {
         });
         const data = await response.json();
         setItems(data.items);
-        // console.log(data.items)
       } catch (e) {
         console.log(e.message);
       }
     };
     getCart();
   }, []);
-
-  //   useEffect(() => {
-  //     const getUser = async () => {
-  //       // console.log(user)
-  //       try {
-  //         const response = await fetch(`/api/auth/profile`, {
-  //           method: "GET",
-  //         });
-  //         const data = await response.json();
-  //         // setItems(data.items);
-  //         console.log("Inside")
-  //         console.log(data)
-  //       } catch (e) {
-  //         console.log(e.message);
-  //       }
-  //     };
-  //     getUser();
-  //   }, []);
 
   return (
     <>

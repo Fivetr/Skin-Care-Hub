@@ -58,9 +58,7 @@ function MyOrdersPage() {
 
   useEffect(() => {
     const getTransactions = async () => {
-      // console.log(user)
       if (!user) {
-        //todo - error msg?
         return false;
       }
       try {
@@ -69,7 +67,6 @@ function MyOrdersPage() {
         });
         const data = await response.json();
         setTransactions(data);
-        console.log(data)
       } catch (e) {
         console.log(e.message);
       }

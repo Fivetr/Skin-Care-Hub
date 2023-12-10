@@ -1,8 +1,8 @@
 import React from "react";
 import { FaBars } from "react-icons/fa";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { FaCartShopping, FaRegNewspaper, FaClockRotateLeft } from "react-icons/fa6";
-import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { FaCartShopping, FaClockRotateLeft } from "react-icons/fa6";
+import { FiLogIn, FiLogOut, FiUser } from "react-icons/fi";
 import { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
@@ -31,10 +31,8 @@ function Header({ pageBG }) {
         method: "GET",
         credentials: "same-origin",
       });
-      console.log(response);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         dispatch(offsetUser());
         navigate("/");
         toast.success("LOGGED OUT");
@@ -57,7 +55,7 @@ function Header({ pageBG }) {
 
   useEffect(() => {
     const getCart = async () => {
-      if(!user){
+      if(!user || isAdmin){
           return false;
         }
     try {
@@ -89,7 +87,7 @@ function Header({ pageBG }) {
             </div>
           </div>
           {user && !isMobile && (
-            <div className="tw-flex tw-justify-center">
+            <div className="tw-flex tw-items-center tw-justify-center">
               <span className="tw-text-center tw-text-xl tw-font-semibold tw-italic tw-text-gray-600">
                 Hi, {currentUser.username} !
               </span>
@@ -131,13 +129,6 @@ function Header({ pageBG }) {
                   </Link> 
                 </li>
             }
-            {
-              // (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Home">
-              //     <Link to="/" className="tw-text-black">
-              //       <FaRegNewspaper className="tw-w-[1.5rem] tw-h-[1.5rem]" />
-              //     </Link> 
-              //   </li>
-            }
             
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Login/Logout">
               {user ? (
@@ -166,8 +157,16 @@ function Header({ pageBG }) {
         >
           <nav className="tw-mx-auto tw-w-[18rem] tw-rounded-lg tw-border-gray-200">
             <ul className="tw-mb-0">
+              {
+                user && <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg"
+                title="Username"
+                >
+                  Hi, {currentUser.username}
+                  <FiUser />
+                </li>
+              }
               <Link to="/auth" className="tw-text-black tw-no-underline" onClick={user && {handleLogout}}>
-                <li className="tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200 tw-rounded-t-lg"
+                <li className={`${!user && 'tw-rounded-t-lg'} tw-flex tw-gap-2 tw-items-center tw-justify-start tw-pl-5 tw-p-2 tw-cursor-pointer hover:tw-bg-gray-400 tw-bg-gradient-to-r tw-from-green-300 tw-to-blue-300 hover:tw-from-sky-300 hover:tw-to-teal-300 tw-font-bold tw-border-b tw-border-gray-200`}
                 title="Login/Logout"
                 >
                   Login/Logout

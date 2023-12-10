@@ -23,9 +23,7 @@ function NewProductPage() {
         method: "GET",
         headers: { "Content-Type": "application/json" }
       });
-      console.log("got a response");
       const data = await response.json();
-      console.log(data);
       setName(data.product_name);
       setType(data.product_type);
       setPrice(data.price);
@@ -38,7 +36,6 @@ function NewProductPage() {
   }
   useEffect(() => {
     if (id) {
-      console.log("Make api call to get product details");
       getProductDetails();
     }
   }, [id]);
@@ -72,7 +69,6 @@ function NewProductPage() {
       },
       body: JSON.stringify(product),
     });
-    console.log(response);
     if (response.ok) {
       toast.success("Added product successfully");
       navigate("/search");
@@ -89,7 +85,6 @@ function NewProductPage() {
       },
       body: JSON.stringify(product),
     });
-    console.log(response);
     if (response.ok) {
       toast.success("Edited product successfully");
       navigate("/search");
@@ -123,7 +118,7 @@ function NewProductPage() {
     <>
       <Header />
       <main
-        className={`${!id && 'tw-justify-center'} tw-h-[calc(90vh-3.5rem)] tw-flex tw-flex-col tw-items-center tw-overflow-y-scroll`}
+        className={`${!id && 'tw-justify-center'} tw-h-[calc(93vh-3.5rem)] tw-flex tw-flex-col tw-items-center tw-overflow-y-scroll`}
         style={{ textAlign: "center" }}
       >
         <h2 className="tw-mt-4 tw-text-3xl tw-font-semibold tw-text-gray-800 tw-pb-2">

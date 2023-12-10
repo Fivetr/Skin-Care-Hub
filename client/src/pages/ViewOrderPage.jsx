@@ -12,7 +12,6 @@ function ViewOrderPage() {
     const renderMyOrder = () =>
         transaction.orderData[0].purchase_units[0].items ?
             transaction.orderData[0].purchase_units[0].items.map((item, index) => {
-                console.log(item)
                 return (
                     <div
                       key={`${index}`}
@@ -45,7 +44,6 @@ function ViewOrderPage() {
             });
             const data = await response.json();
             setTransaction(data);
-            console.log(data)
           } catch (e) {
             console.log(e.message);
           }

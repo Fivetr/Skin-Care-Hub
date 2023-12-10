@@ -21,7 +21,6 @@ function sign({ setAuthMenu }) {
       });
       if (!response.ok) {
         const response_data = await response.json();
-        console.log(response_data.msg);
         switch (response_data.msg) {
           case "email not found":
             toast.error("NO SUCH EMAIL FOUND");
@@ -36,7 +35,6 @@ function sign({ setAuthMenu }) {
         return;
       }
       const data = await response.json();
-      console.log(data);
       dispatch(setUser(data));
       setloading(false);
       if (data.isAdmin) {
