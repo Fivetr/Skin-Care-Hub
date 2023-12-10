@@ -48,7 +48,7 @@ function ProductDetail() {
   return(
 <>
   <Header />
-  <main className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+  <main className="tw-h-screen tw-flex tw-flex-col tw-justify-center tw-items-center">
   {product ?  (
           <>
               <Product
