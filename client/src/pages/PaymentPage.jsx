@@ -183,7 +183,8 @@ function PaymentPage() {
   return (
     <>
       <Header />
-      {items ? (
+
+      {items && (
         <>
           <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
             <div className="tw-text-base lg:tw-text-2xl md:tw-text-xl tw-font-bold tw-pt-10">
@@ -232,7 +233,6 @@ function PaymentPage() {
                     Free
                   </div>
                 </div>
-
                 <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
                 <div className="tw-flex tw-flex-row px-6 py-2 tw-mt-3">
                   <div className="tw-basis-1/12"></div>
@@ -247,8 +247,7 @@ function PaymentPage() {
             </div>
           </div>
         </>
-      ) : null}
-
+      )}
       <Footer />
     </>
   );
