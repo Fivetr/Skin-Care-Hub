@@ -118,7 +118,7 @@ function NewProductPage() {
     <>
       <Header />
       <main
-        className={`${!id && 'tw-justify-center'} tw-h-[calc(90vh-3.5rem)] tw-flex tw-flex-col tw-items-center tw-overflow-y-scroll`}
+        className={`${!id && 'tw-justify-center'} tw-h-[calc(93vh-3.5rem)] tw-flex tw-flex-col tw-items-center tw-overflow-y-scroll`}
         style={{ textAlign: "center" }}
       >
         <h2 className="tw-mt-4 tw-text-3xl tw-font-semibold tw-text-gray-800 tw-pb-2">

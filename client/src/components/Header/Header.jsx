@@ -55,7 +55,7 @@ function Header({ pageBG }) {
 
   useEffect(() => {
     const getCart = async () => {
-      if(!user){
+      if(!user || isAdmin){
           return false;
         }
     try {
@@ -128,13 +128,6 @@ function Header({ pageBG }) {
                     <FaClockRotateLeft className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                   </Link> 
                 </li>
-            }
-            {
-              // (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Home">
-              //     <Link to="/" className="tw-text-black">
-              //       <FaRegNewspaper className="tw-w-[1.5rem] tw-h-[1.5rem]" />
-              //     </Link> 
-              //   </li>
             }
             
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Login/Logout">

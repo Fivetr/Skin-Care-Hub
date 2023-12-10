@@ -29,7 +29,6 @@ function ProductDetail() {
 
   const handleAddToCart = async (userQuantity) => {
     if(!user){
-      //todo - error msg?
       return false;
     }
     try {
