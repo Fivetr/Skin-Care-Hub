@@ -189,69 +189,65 @@ function PaymentPage() {
 
       {items ?
       <>
-      <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
-        <div className="tw-text-base lg:tw-text-2xl md:tw-text-xl tw-font-bold tw-pt-10">
-          Review Order
+        <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
+          <div className="tw-text-base lg:tw-text-2xl md:tw-text-xl tw-font-bold tw-pt-10">
+            Review Order
           </div>
         </div>
-      </div>
-      <div className=" tw-h-auto tw-max-w-[1440px]  tw-mx-auto">
-        <div className="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center lg:tw-gap-3">
-          <section className="tw-flex tw-mx-auto tw-items-center tw-justify-center tw-text-xl tw-h-auto">
-            <div>
-              {items ? renderItems() : null}
-            </div>
-          </section>
+        <div className=" tw-h-auto tw-max-w-[1440px]  tw-mx-auto">
+          <div className="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center lg:tw-gap-3">
+            <section className="tw-flex tw-mx-auto tw-items-center tw-justify-center tw-text-xl tw-h-auto">
+              <div>
+                {items ? renderItems() : null}
+              </div>
+            </section>
 
             <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[5rem] tw-justify-center tw-h-[20rem] tw-text-3/4 tw-mr-10">
               <div className="tw-ml-10 tw-pt-5 tw-pb-5 lg:tw-w-[20rem] tw-w-[16rem] md:tw-w-[18rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
                 <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                <PayPalScriptProvider options={initialOptions} className="tw-w-3/4">
-                  <PayPalButtons className="tw-mb-3"
-                      createOrder={(data, actions) => {
-                        return actions.order.create({
-                            purchase_units: generateUnits()
-                        })
-                    }}
-                    onApprove={onApprove}
-                  />
-                </PayPalScriptProvider>
-                </div>
-                <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
-                <div className="tw-flex tw-flex-row px-6 py-2 my-1 tw-mt-2">
-                  <div className="tw-basis-1/12"></div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
-                    Subtotal ({getQuantity()} items)
-                  </div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
-                    ${getPrice()}
-                  </div>
-                </div>
+                        <PayPalScriptProvider options={initialOptions} className="tw-w-3/4">
+                          <PayPalButtons className="tw-mb-3"
+                              createOrder={(data, actions) => {
+                                return actions.order.create({
+                                    purchase_units: generateUnits()
+                                })
+                            }}
+                            onApprove={onApprove}
+                          />
+                        </PayPalScriptProvider>
+                        </div>
+                            <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
+                            <div className="tw-flex tw-flex-row px-6 py-2 my-1 tw-mt-2">
+                              <div className="tw-basis-1/12"></div>
+                              <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
+                                Subtotal ({getQuantity()} items)
+                              </div>
+                              <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
+                                ${getPrice()}
+                              </div>
+                            </div>
+                            <div className="tw-flex tw-flex-row px-6 pb-2 pt-0">
+                              <div className="tw-basis-1/12"></div>
+                              <div className="tw-text-base mb-2 tw-basis-3/4">Shipping</div>
+                              <div className="tw-font-bold tw-text-base mb-2 tw-basis-1/4 tw-text-green-600">
+                                Free
+                              </div>
+                            </div>
+                            <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
+                            <div className="tw-flex tw-flex-row px-6 py-2 tw-mt-3">
+                                <div className="tw-basis-1/12"></div>
+                                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
+                                  Estimated Total
+                                </div>
+                                <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
+                                  ${getPrice()}
+                                </div>
+                            </div>
+                
               </div>
-              <div className="tw-flex tw-flex-row px-6 pb-2 pt-0">
-                <div className="tw-basis-1/12"></div>
-                <div className="tw-text-base mb-2 tw-basis-3/4">Shipping</div>
-                <div className="tw-font-bold tw-text-base mb-2 tw-basis-1/4 tw-text-green-600">
-                  Free
-                </div>
-              </div>
-
-
-                <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
-                <div className="tw-flex tw-flex-row px-6 py-2 tw-mt-3">
-                  <div className="tw-basis-1/12"></div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
-                    Estimated Total
-                  </div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
-                    ${getPrice()}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+            </section>
+          </div>
         </div>
-      </div>
       </>
       : null}
       <Footer />
