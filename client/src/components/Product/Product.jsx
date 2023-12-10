@@ -123,7 +123,7 @@ function Product({
             {
               (user && !isAdmin) && <button
                 className="tw-flex tw-items-center tw-justify-center tw-text-white tw-end-2.5 tw-bottom-2.5 tw-bg-blue-600 hover:tw-bg-blue-700 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-blue-200 tw-font-medium tw-rounded-lg tw-text-sm tw-px-4 tw-py-2" type="button"
-                onClick={handleAddToCart(userQuantity)}
+                onClick={() => {handleAddToCart(userQuantity)}}
               >
                 Add to cart
               </button>

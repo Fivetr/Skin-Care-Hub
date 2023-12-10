@@ -47,30 +47,30 @@ function ProductDetail() {
   };
   return(
 <>
-<Header />
-<main className="tw-flex tw-flex-col tw-justify-center tw-items-center">
-{product ?  (
-        <>
-            <Product
-            id = {id}
-            name = {product.product_name}
-            type = {product.product_type}
-            price = {product.price}
-            img = {product.image_url}
-            ingredients = {product.clean_ingreds}
-            quantity = {product.quantity}
-            handleAddToCart = {handleAddToCart}
-            />
-        </>) :
-        (
-          <div className="tw-flex tw-h-[calc(100vh-14rem)] tw-items-center tw-justify-center tw--mt-5">
-            <CiShoppingBasket className="tw-animate-pulse tw-w-[20rem] tw-h-[20rem]" />
-          </div>
-        )
-        }
-         </main>
-         <Footer />
-</>
+  <Header />
+  <main className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+  {product ?  (
+          <>
+              <Product
+              id = {id}
+              name = {product.product_name}
+              type = {product.product_type}
+              price = {product.price}
+              img = {product.image_url}
+              ingredients = {product.clean_ingreds}
+              quantity = {product.quantity}
+              handleAddToCart = {handleAddToCart}
+              />
+          </>) :
+          (
+            <div className="tw-flex tw-h-[calc(100vh-14rem)] tw-items-center tw-justify-center tw--mt-5">
+              <CiShoppingBasket className="tw-animate-pulse tw-w-[20rem] tw-h-[20rem]" />
+            </div>
+          )
+          }
+          </main>
+          <Footer />
+  </>
   );
 }
 
