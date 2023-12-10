@@ -125,7 +125,7 @@ function Header({ pageBG }) {
                 </li>
             }
             {
-              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700">
+              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Orders">
                   <Link to={`/myorders/${currentUser._id}`} className="tw-text-black">
                     <FaClockRotateLeft className="tw-w-[1.5rem] tw-h-[1.5rem]" />
                   </Link> 
