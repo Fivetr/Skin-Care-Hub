@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { useNavigate } from "react-router-dom";
+import { getFormattedDate } from "../utills/DateUtility.js"
 
 function MyOrdersPage() {
 
@@ -31,7 +32,7 @@ function MyOrdersPage() {
                   </div>
                   <div className="tw-basis-1/4 tw-w-70">
                   <span className="tw-inline-block tw-rounded-full tw-px-4 tw-py-2 tw-text-sm md:tw-text-base tw-font-semibold tw-mr-2">
-                    Date {transaction.date}
+                    Date {getFormattedDate(transaction.date)}
                   </span>
                   </div>
                   <div className="tw-basis-1/4 tw-text-sm tw-w-40 tw-pt-2 lg:tw-mt-0 tw-font-semibold">
