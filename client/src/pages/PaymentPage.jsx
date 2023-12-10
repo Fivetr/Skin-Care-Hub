@@ -202,7 +202,7 @@ function PaymentPage() {
             </section>
 
             <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[5rem] tw-justify-center tw-h-[20rem] tw-text-3/4 tw-mr-10">
-              <div className="tw-ml-10 tw-pt-5 tw-pb-5 lg:tw-w-[20rem] tw-w-[20rem] md:tw-w-[18rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
+              <div className="tw-ml-10 tw-pt-5 tw-pb-5 lg:tw-w-[20rem] tw-w-[16rem] md:tw-w-[18rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
                 <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
                 <PayPalScriptProvider options={initialOptions} className="tw-w-3/4">
                   <PayPalButtons className="tw-mb-3"
@@ -221,7 +221,7 @@ function PaymentPage() {
                   <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
                     Subtotal ({getQuantity()} items)
                   </div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4">
+                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
                     ${getPrice()}
                   </div>
                 </div>
@@ -239,7 +239,7 @@ function PaymentPage() {
                   <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
                     Estimated Total
                   </div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4">
+                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
                     ${getPrice()}
                   </div>
                 </div>
