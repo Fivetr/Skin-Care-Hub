@@ -183,7 +183,6 @@ function PaymentPage() {
   return (
     <>
       <Header />
-
       {items ? (
         <>
           <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
@@ -249,6 +248,7 @@ function PaymentPage() {
           </div>
         </>
       ) : null}
+
       <Footer />
     </>
   );
