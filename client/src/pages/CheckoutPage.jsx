@@ -177,7 +177,7 @@ function CheckoutPage() {
       <>
         <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
           <div className="tw-text-base lg:tw-text-2xl md:tw-text-xl tw-font-bold tw-pt-10">
-            Shopping Cart ({getQuantity()} items)
+            Shopping Cart ({getQuantity()} {getQuantity() === 1 ? "item" : "items"})
           </div>
         </div>
         <div className="tw-max-w-[1440px]  tw-mx-auto">
