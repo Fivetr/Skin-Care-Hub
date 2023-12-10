@@ -22,14 +22,14 @@ function ViewOrderPage() {
                         <div className="tw-flex tw-flex-row lg:tw-flex-row tw-px-6 tw-py-4 tw-bg-white">
                             <div className="tw-basis-1/3 tw-left-1 ">
                                 <span className="tw-inline-block tw-rounded-full tw-px-4 tw-py-2 tw-text-sm md:tw-text-base tw-font-semibold tw-mr-2">
-                                    Price ${item.unit_amount.value}
+                                    ${item.unit_amount.value}
                                 </span>
                             </div>
                             <div className="tw-basis-1/3 tw-font-bold tw-text-xl tw-mb-2 tw-text-gray-800">
-                                Name {item.name}
+                                {item.name}
                             </div>
                             <p className="tw-basis-1/3 tw-text-gray-600 tw-text-base">
-                                Quantity {item.quantity}
+                                {item.quantity}
                             </p> 
                         </div>
                       </div>
@@ -91,7 +91,7 @@ function ViewOrderPage() {
 
           <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[5rem] tw-justify-center tw-h-[20rem] tw-text-3/4  ">
             <div className="tw-pt-5 tw-pb-5 lg:tw-w-[25rem] tw-w-[20rem] md:tw-w-[23rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
-              <div className="tw-flex tw-flex-col tw-justify-center tw-items-center"> 
+              <div className="tw-flex tw-flex-col tw-justify-center tw-items-center tw-font-bold"> 
                   Payment Information
               </div>
               <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" />
