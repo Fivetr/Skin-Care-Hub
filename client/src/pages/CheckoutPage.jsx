@@ -172,7 +172,7 @@ function CheckoutPage() {
   return (
     <>
       <Header />
-      <main className="tw-h-[calc(100vh-3.5rem)]">
+      <main className="tw-h-[calc(100vh-3.5rem)] tw-h-screen tw-flex tw-flex-col">
         <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
           <div className="tw-text-base lg:tw-text-2xl md:tw-text-xl tw-font-bold tw-pt-10">
             Shopping Cart ({getQuantity()} items)
