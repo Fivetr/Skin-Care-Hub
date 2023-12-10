@@ -122,11 +122,11 @@ function Header({ pageBG }) {
                 </li>
             }
             {
-              (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Home">
-                  <Link to="/" className="tw-text-black">
-                    <FaRegNewspaper className="tw-w-[1.5rem] tw-h-[1.5rem]" />
-                  </Link> 
-                </li>
+              // (user && !isAdmin) && <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Home">
+              //     <Link to="/" className="tw-text-black">
+              //       <FaRegNewspaper className="tw-w-[1.5rem] tw-h-[1.5rem]" />
+              //     </Link> 
+              //   </li>
             }
             
             <li className="tw-p-2 tw-cursor-pointer hover:tw-scale-125 tw-duration-700" title="Login/Logout">

@@ -76,7 +76,7 @@ function CheckoutPage() {
               <div className="tw-overflow-hidden tw-rounded-md tw-shadow-lg tw-w-25 tw-relative">
                 <div className="tw-flex-initial tw-absolute tw-top-2 tw--left-1 ">
                   <span className="tw-inline-block tw-rounded-full tw-px-4 tw-py-2 tw-text-sm md:tw-text-base tw-font-semibold tw-mr-2">
-                    ${product.product.price}
+                    ${product.product.price.toFixed(2)}
                   </span>
                 </div>
                 <div className="tw-flex tw-flex-col lg:tw-flex-row tw-px-6 tw-py-4 tw-bg-white">
@@ -131,7 +131,7 @@ function CheckoutPage() {
           price = price + item.quantity * item.product.price;
         })
       : null;
-    return price;
+    return price.toFixed(2);
   };
 
   const getQuantity = () => {
@@ -172,7 +172,7 @@ function CheckoutPage() {
   return (
     <>
       <Header />
-      <main className="tw-h-[calc(100vh-3.5rem)] tw-h-screen tw-flex tw-flex-col">
+      <main className="tw-h-[calc(100vh-3.5rem)] tw-flex tw-flex-col tw-min-h-screen">
       {items && items.length>0 ?
       <>
         <div className="tw-h-20 tw-w-full tw-flex tw-flex-row tw-justify-center">
@@ -193,22 +193,22 @@ function CheckoutPage() {
               </div>
             </section>
 
-            <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[5rem] tw-justify-center tw-h-[20rem] tw-text-3/4 tw-mx-auto ">
+            <section className="tw-flex tw-pb-12 lg:tw-pr-2 tw-items-center tw-mt-[1rem] tw-justify-center tw-h-[20rem] tw-text-3/4 tw-mx-auto tw-ml-24">
               <div className="tw-pt-5 tw-pb-5 lg:tw-w-[20rem] tw-w-[15rem] md:tw-w-[15rem] tw-border tw-border-gray-200 tw-rounded-none md:tw-rounded-md">
                 <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
-                  <button className="tw-mb-3 tw-w-3/4 tw-bg-blue-500  tw-hover:bg-blue-700 tw-text-white tw-font-bold py-2 px-6 my-3 tw-rounded-full"
+                  <button className="tw-mb-4 tw-w-3/4 tw-bg-blue-500 tw-hover:bg-blue-700 tw-text-white tw-font-bold tw-py-3 tw-px-6 tw-my-2 tw-rounded-full"
                     onClick={handleCheckout}
                   >
                     Continue to Checkout
                   </button>
                 </div>
                 {/* <hr className="tw-divide-y tw-divide-gray-50 tw-dark:divide-gray-50" /> */}
-                <div className="tw-flex tw-flex-row px-6 py-2 my-1">
+                <div className="tw-flex tw-flex-row tw-px-6 tw-py-2 tw-my-1">
                   <div className="tw-basis-1/12"></div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-3/4">
+                  <div className="tw-font-bold tw-text-lg tw-mb-2 tw-basis-3/4">
                     Subtotal ({getQuantity()} items)
                   </div>
-                  <div className="tw-font-bold tw-text-lg mb-2 tw-basis-1/4 tw-mr-3">
+                  <div className="tw-font-bold tw-text-lg tw-mb-2 tw-basis-1/4 tw-mr-3">
                     ${getPrice()}
                   </div>
                 </div>
@@ -244,6 +244,7 @@ function CheckoutPage() {
         
       </>
       }
+        <div className="tw-flex-grow"></div>
         <Footer />
       </main>
       

@@ -6,6 +6,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { CiShoppingBasket } from "react-icons/ci";
 import { setItemCount } from "../redux/features/auth/cartSlice";
+import { toast } from "react-toastify";
 
 function ProductDetail() {
   const [product, setProduct] = useState();
@@ -40,6 +41,7 @@ function ProductDetail() {
         body: JSON.stringify({user: user, product: product, quantity: userQuantity}),
       });
       console.log(response);
+      toast.success("Product added to cart successfully!");
       dispatch(setItemCount({ itemCount: count+1}));
     } catch (e) {
       console.log(e)
@@ -48,14 +50,14 @@ function ProductDetail() {
   return(
 <>
   <Header />
-  <main className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+  <main className="tw-h-screen tw-flex tw-flex-col tw-justify-center tw-items-center">
   {product ?  (
           <>
               <Product
               id = {id}
               name = {product.product_name}
               type = {product.product_type}
-              price = {product.price}
+              price = {product.price.toFixed(2)}
               img = {product.image_url}
               ingredients = {product.clean_ingreds}
               quantity = {product.quantity}
