@@ -1,23 +1,58 @@
 
-# Skin Product Store App
+# CS6314.002 Web Programming Languages - Final Project :Skin Product Store App
 
-  A full-stack web-app to buy high quality skin-care products.
+A full-stack web-app to buy high quality skin-care products.
 
 ## Tech Stack:
 
- React, Vite, Passportjs, Redux, Mongo, Express
+React, Vite, Passport.js, Redux, MongoDB, Express, Tailwind CSS, React Bootstrap, Nodemon and React-toastify 
  
-## How to set-up and run:
+## Deployment
 
   - Unzip the contents of the tar
-  - move to the folder 'skin-product-store' using the `cd skin-product-store` on a terminal
-  - create a `.env` file in the 'server folder' by navigating using `cd server` and set following environment variables in the file :
-	  - `nano .env`
-	  - `\MONGO_URL = "mongodb+srv://admin:admin@cluster0.ekw0gpp.mongodb.net/SkinProducts?retryWrites=true&w=majority"` `SercetKey = "your-secret-key"`
-`PAYPAL_CLIENT_ID = Aeku9GKbX-rcwq4iczmH8JLGJOtGfZ0NxGhll6_-C2b4tjop8QIWsTFvf-QywNbld0x0GL6bAtAKnVhO`
-`PAYPAL_CLIENT_SECRET = ECyMXZdbzPG0N9orCwgnT3ZxiF5C6gmyfacdsUGzK5BuaXPsctFkQTrfwt3bI2lt6jaqDo_8elBpUMup`
-	- `:wq` to save and exit
-  - Now, open 2 terminals, in the first one execute `cd client`, then `npm install` to install all dependencies. Then run `npm run dev` to launch the client,
-  - now navigate to the second terminal, perform `cd server` , then `npm install` to install all dependencies. Then run `npm run dev` to launch the server.
+  - Move to the folder 'skin-product-store'
+   	```bash
+	cd skin-product-store
+	```
+  - Create a `.env` file in the 'server' folder by navigating using `cd server` and set following environment variables in the file `nano .env` 
+    ```bash
+	MONGO_URL = "mongodb+srv://admin:admin@cluster0.ekw0gpp.mongodb.net/SkinProducts?retryWrites=true&w=majority"
+	```
+     ```bash
+	SercetKey = "your-secret-key"
+	```
+	   ```bash
+	PAYPAL_CLIENT_ID = Aeku9GKbX-rcwq4iczmH8JLGJOtGfZ0NxGhll6_-C2b4tjop8QIWsTFvf-QywNbld0x0GL6bAtAKnVhO
+	```
+      ```bash
+	PAYPAL_CLIENT_SECRET = ECyMXZdbzPG0N9orCwgnT3ZxiF5C6gmyfacdsUGzK5BuaXPsctFkQTrfwt3bI2lt6jaqDo_8elBpUMup
+	```
+- `:wq` to save and exit
+-  Now, open the terminal and execute the following commands to run client:-
+ 
+ ```bash
+	cd client 
+	npm install 
+	npm run dev
+```
+- Open another terminal and execute the following commands to run server:-
+ 
+ ```bash
+	cd server 
+	npm install 
+	npm run dev
+```
 - Open the `localhost:\<port>` link in your browser to view the app.
+
+## Implemented By
+Desong Li, dxl180019
+
+Siddhi Mahesh Potdar, smp220001
+
+Tanya Sharma, txs220004
+
+Pritika Priyadarshini, pxp210104
+
+Gauri Sagane, gxs220013
+
 
