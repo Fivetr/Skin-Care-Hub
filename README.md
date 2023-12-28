@@ -16,7 +16,7 @@ React, Vite, Passport.js, Redux, MongoDB, Express, Tailwind CSS, React Bootstrap
 	```
   - Create a `.env` file in the 'server' folder by navigating using `cd server` and set following environment variables in the file `nano .env` 
     ```bash
-	MONGO_URL = "mongodb+srv://admin:admin@cluster0.ekw0gpp.mongodb.net/SkinProducts?retryWrites=true&w=majority"
+	MONGO_URL = ""
 	```
      ```bash
 	SercetKey = "your-secret-key"
